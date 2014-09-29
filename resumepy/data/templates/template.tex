@@ -1,0 +1,65 @@
+%{ if fontsize %}
+\documentclass[%{{-fontsize-%}}]{article}
+%{ else %}
+\documentclass[10pt]{article}
+%{ endif %}
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{tikz,enumitem,setspace,kantlipsum}
+\usepackage{calc}
+\usepackage[paper=letterpaper, includefoot,
+            top=0.5in, bottom=0.5in, 
+            left=0.5in, right=0.5in]{geometry}
+
+\setlength{\parindent}{0in}
+
+% header, footer setup
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy} 
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.email%}} - %{{contact.phone-%}} } }
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks, breaklinks,
+            linkcolor=darkblue, urlcolor=darkblue,
+            anchorcolor=darkblue, citecolor=darkblue}
+
+\title{Resume for %{{ contact.name %}} }
+\author{ %{{contact.name%}} }
+
+\begin{document}
+
+\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
+\tikzstyle{header}=[minimum height=2em, minimum width=7.5in, text width=7.5in, font=\bf, align=left]
+\node[header] (name) {\Large %{{contact.name-%}} };
+\end{tikzpicture}
+
+\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
+\tikzstyle{col}=[minimum height=1em, minimum width=3.75in, text width=3.75in, align=left]
+\node[col] at (0em,0.0em) { %{{ contact.address %}} };
+\node[col] at (0em,-1.5em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
+%{- if not private -%}
+\node[col] at (0em,-3.0em) { %{{ contact.phone %}} };
+\node[col] at (0em,-4.5em) { %{{ contact.email %}} };
+%{- endif -%}
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} \href{ http://%{{-website.link-%}} }{ %{{-website.link-%}} } };
+%{- endfor %}
+\end{tikzpicture}
+
+%{ include 'summary.tex' %}
+
+%{ include 'education2.tex' %}
+
+%{ include 'work.tex' %}
+
+\end{document}

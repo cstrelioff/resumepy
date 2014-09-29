@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Resume for {{contact.name}}">
+    <meta name="author" content="{{contact.name}}">
+
+    <title>{{contact.name}} :: Resume</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet"> 
+
+    <!-- add font-awesoeme -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- header with address -->
+      <div class="header">
+        <h1>{{contact.name}}</h1>
+        
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <address>
+              {{contact.address}}<br>
+              {{contact.city}}, {{contact.state}} {{contact.zip}}<br>
+              {{contact.phone}}<br>
+              {{contact.email}}
+            </address>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+          <p>
+          {%- for website in online %}
+            <a href="http://{{website.link}}" target="_blank_">
+             {% if website.site == 'website' %}
+               <i class="fa fa-home fa-fw"></i> {{website.site}}</a><br>
+             {% elif website.site == 'blog' %}
+               <i class="fa fa-pencil fa-fw"></i> {{website.site}}</a><br>
+             {% elif website.site == 'linkedin' %}
+               <i class="fa fa-linkedin-square fa-fw"></i> {{website.site}}</a><br>
+             {% elif website.site == 'github' %}
+               <i class="fa fa-github fa-fw"></i> {{website.site}}</a><br>
+             {% else %}
+                {{website.site}}</a><br>
+             {% endif %}
+          {% endfor -%}
+          </p>
+          </div>
+        </div>
+      </div>
+
+      {% if summary %}
+      <div id="summary">
+        <h2>Summary</h2>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+              <p class="text-left">
+              {{summary}}
+              </p>
+            </div>
+        </div>
+      </div>
+      {% endif %}
+      
+      <div id="education">
+        <h2>Education</h2>
+        <hr>
+        {% for school in education %}
+          <div class="row">
+            <div class="col-xs-6 col-sm-2">
+              <p class="text-left">
+              <strong>{{school.degree}}</strong>, {{school.focus}}
+              </p>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <p class="text-left"><strong>{{school.schoolname}}</strong></p>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+              <p class="text-left">
+              <strong>{{school.graduation}}</strong>
+              </p>
+            </div>  
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p><ul>
+              {% for note in school.notes %}
+                <li>{{note}}</li>
+              {% endfor %}
+              </ul></p>
+            </div>
+          </div>
+        {% endfor %}
+
+        {% if educationother %}
+        <h3>Additional Education</h3>
+          <div class="row">
+          {% for school in educationother %} 
+            <div class="col-xs-6 col-sm-2">
+              <p class="text-left">
+              {{school.course}}
+              </p>
+            </div>
+          {% endfor %}
+          </div>
+          {% endif %}  
+      </div>
+
+      <div id="work">
+        <h2>Experience</h2>
+        <hr>
+        {% for job in work %}
+          <div class="row">
+            <div class="col-xs-6 col-sm-2">
+              <p class="text-left">
+              <strong>{{job.position}}</strong>
+              </p>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <p class="text-left"><strong>{{job.organization}}</strong></p>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+              <p class="text-left">
+              <strong>{{job.start}} - {{job.stop}}</strong>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p><ul>
+              {% for note in job.notes %}
+                <li>{{note}}</li>
+              {% endfor %}
+              </ul></p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{{contact.name}}
+{{contact.address}}
+{{contact.city}}, {{contact.state}} {{contact.zip}}
+{{contact.phone}}
+{{contact.email}}
+
+Experience
+{% for job in work %}
+{{job.organization}}
+{{job.start}} - {{job.stop}}
+{% endfor %}
