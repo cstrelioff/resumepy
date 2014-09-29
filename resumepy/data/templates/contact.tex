@@ -1,0 +1,17 @@
+\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
+\tikzstyle{header}=[minimum height=2em, minimum width=7.5in, text width=7.5in, font=\bf, align=left]
+\node[header] (name) {\Large %{{contact.name-%}} };
+\end{tikzpicture}
+
+\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
+\tikzstyle{col}=[minimum height=1em, minimum width=3.75in, text width=3.75in, align=left]
+\node[col] at (0em,0.0em) { %{{ contact.address %}} };
+\node[col] at (0em,-1.5em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
+%{- if not private -%}
+\node[col] at (0em,-3.0em) { %{{ contact.phone %}} };
+\node[col] at (0em,-4.5em) { %{{ contact.email %}} };
+%{- endif -%}
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} \href{ http://%{{-website.link-%}} }{ %{{-website.link-%}} } };
+%{- endfor %}
+\end{tikzpicture}
