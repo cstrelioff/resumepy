@@ -12,6 +12,6 @@
 \node[col] at (0em,-4.5em) { %{{ contact.email %}} };
 %{- endif -%}
 %{- for website in online %}
-\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} \href{ http://%{{-website.link-%}} }{ %{{-website.link-%}} } };
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
 %{- endfor %}
 \end{tikzpicture}
