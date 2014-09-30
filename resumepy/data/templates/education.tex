@@ -8,13 +8,15 @@
 \tikzstyle{f1}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
 \tikzstyle{f2}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, align=left]
 \tikzstyle{f3}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
+\tikzstyle{f4}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
 \tikzstyle{c1}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
 \node[f1] (s1%{{-school.schoolname-%}}) { %{{school.degree%}}, %{{school.focus%}} };
 \node[f2] (s2%{{-school.schoolname-%}}) [below=of s1%{{-school.schoolname-%}}] { %{{school.schoolname%}} };
 \node[f3] (s3%{{-school.schoolname-%}}) [right=of s1%{{-school.schoolname-%}}] { %{{school.graduation%}} };
+\node[f4] (s4%{{-school.schoolname-%}}) [below=of s3%{{-school.schoolname-%}}] { };
 
 %{- if school.notes %}
-\node[c1] [below=of s3%{{-school.schoolname-%}}.south west, yshift=-1em] { 
+\node[c1] [below=of s3%{{-school.schoolname-%}}.south west] { 
   \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
                   leftmargin=*]
 %{- for note in school.notes %}
