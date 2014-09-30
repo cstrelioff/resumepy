@@ -5,13 +5,69 @@
 
 \begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
 \tikzstyle{col}=[minimum height=1em, minimum width=3.75in, text width=3.75in, align=left]
-\node[col] at (0em,0.0em) { %{{ contact.address %}} };
+%{- if (no_phone) and (no_email) and (no_address) %}
+\node[col] at (0em,0.0em)  {  };
+\node[col] at (0em,-1.5em) {  };
+\node[col] at (0em,-3.0em) {  };
+\node[col] at (0em,-4.5em) {  };
+%{- for website in online %}
+\node[col] at (0em,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- elif (no_phone) and (no_email) and (not no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
 \node[col] at (0em,-1.5em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
-%{- if not private -%}
-\node[col] at (0em,-3.0em) { %{{ contact.phone %}} };
-\node[col] at (0em,-4.5em) { %{{ contact.email %}} };
-%{- endif -%}
+\node[col] at (0em,-3.0em) {  };
+\node[col] at (0em,-4.5em) {  };
 %{- for website in online %}
 \node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
 %{- endfor %}
+%{- elif (no_phone) and (not no_email) and (no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.email %}} };
+\node[col] at (0em,-1.5em) {  };
+\node[col] at (0em,-3.0em) {  };
+\node[col] at (0em,-4.5em) {  };
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- elif (no_phone) and (not no_email) and (not no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
+\node[col] at (0em,-1.5em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
+\node[col] at (0em,-3.0em) { %{{ contact.email %}} };
+\node[col] at (0em,-4.5em) {  };
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- elif (not no_phone) and (no_email) and (no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.phone %}} };
+\node[col] at (0em,-1.5em) {  };
+\node[col] at (0em,-3.0em) {  };
+\node[col] at (0em,-4.5em) {  };
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- elif (not no_phone) and (no_email) and (not no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
+\node[col] at (0em,-1.5em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
+\node[col] at (0em,-3.0em) { %{{ contact.phone %}} };
+\node[col] at (0em,-4.5em) {  };
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- elif (not no_phone) and (not no_email) and ( no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.phone %}} };
+\node[col] at (0em,-1.5em) { %{{ contact.email %}} };
+\node[col] at (0em,-3.0em) {  };
+\node[col] at (0em,-4.5em) {  };
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- elif (not no_phone) and (not no_email) and (not no_address) %}
+\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
+\node[col] at (0em,-1.5em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
+\node[col] at (0em,-3.0em) { %{{ contact.phone %}} };
+\node[col] at (0em,-4.5em) { %{{ contact.email %}} };
+%{- for website in online %}
+\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
+%{- endfor %}
+%{- endif %}
 \end{tikzpicture}

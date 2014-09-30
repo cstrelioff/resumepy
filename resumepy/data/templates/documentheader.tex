@@ -1,8 +1,8 @@
-%{ if fontsize %}
+%{- if fontsize %}
 \documentclass[%{{-fontsize-%}}]{article}
-%{ else %}
+%{- else %}
 \documentclass[10pt]{article}
-%{ endif %}
+%{- endif %}
 \usepackage{lmodern}
 \renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
@@ -22,7 +22,15 @@
 \pagestyle{fancy} 
 \fancyhead{}
 \fancyfoot{}
+%{- if (not no_email) and (not no_phone) %}
 \fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.email%}} - %{{contact.phone-%}} } }
+%{- elif (no_email) and (not no_phone) %}
+\fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.phone-%}} } }
+%{- elif (not no_email) and (no_phone) %}
+\fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.email%}} } }
+%{- elif (no_email) and (no_phone) %}
+\fancyfoot[C]{\textbf{ %{{-contact.name%}} } }
+%{- endif %}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 

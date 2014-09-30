@@ -104,20 +104,28 @@ def process_text(resume):
 def main():
     """Entry point for ``resumepy`` script."""
     parser = argparse.ArgumentParser(description='Create resume from yaml file.')
-    parser.add_argument('--file', '-f', help = 'input yaml file name',
+    parser.add_argument('-f', dest='file', help = 'input yaml file name',
                         type = str, required = True)
-    parser.add_argument('--output', '-o', help ='output format',
+    parser.add_argument('-o', dest='output', help ='output format',
                         choices = ['txt', 'html', 'pdf'],
                         type = str, required = True)
-    parser.add_argument('--keep_private', help ='do not include phone and email',
-                        dest='private', action='store_true', default=False,
+    parser.add_argument('--no_address', help ='do not include mailing address',
+                        dest='no_address', action='store_true', default=False,
+                        required = False)
+    parser.add_argument('--no_phone', help ='do not include phone number',
+                        dest='no_phone', action='store_true', default=False,
+                        required = False)
+    parser.add_argument('--no_email', help ='do not include email',
+                        dest='no_email', action='store_true', default=False,
                         required = False)
     args = parser.parse_args()
 
     with open(args.file) as f:
         resume = yaml.load(f)
 
-    resume['private'] = args.private
+    resume['no_address'] = args.no_address
+    resume['no_phone'] = args.no_phone
+    resume['no_email'] = args.no_email
 
     if args.output == 'txt':
         process_text(resume)
