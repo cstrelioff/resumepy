@@ -21,6 +21,7 @@ from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,
 import os
 import contextlib
 import shutil
+import tempfile
 
 def check_dir(path):
     """Check that directory exists for argparse."""
