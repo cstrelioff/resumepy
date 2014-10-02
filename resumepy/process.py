@@ -30,12 +30,11 @@ from .utils import check_dir
 from .utils import copy_file
 from .utils import mkdirs
 
+resumepy_path = os.path.abspath(os.path.dirname(__file__))
 
 def create_parser():
     """Create argparse parser and define project paths."""
 
-    resumepy_path = os.path.abspath(os.path.dirname(__file__))
-    data_path = os.path.join(resumepy_path, 'data')
     templates_path = os.path.join(resumepy_path, 'data', 'templates')
 
     parser = argparse.ArgumentParser(description='Create resume from yaml file.')
@@ -66,6 +65,7 @@ def process_html(resume, templates_path):
 
     print("-- resumepy: creating bootstrap website...")
 
+    data_path = os.path.join(resumepy_path, 'data')
     for d in ['js', 'css', 'fonts']:
         source_dir = os.path.join(data_path, d)
         target_dir = os.path.join('build', 'html', d)
@@ -112,7 +112,7 @@ def process_pdf(resume, templates_path):
 
     print("-- resumepy: output in {}\n".format(os.path.join(cwd, "build","pdf")))
 
-def process_text(resume, tempalates_path):
+def process_text(resume, templates_path):
     """Process the text verion of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template('template.txt')
