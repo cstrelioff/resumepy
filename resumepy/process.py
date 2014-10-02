@@ -26,14 +26,12 @@ import contextlib
 import yaml
 import jinja2
 
+from .utils import check_dir
 from .utils import copy_file
 from .utils import mkdirs
 
-resumepy_path = os.path.abspath(os.path.dirname(__file__))
-data_path = os.path.join(resumepy_path, 'data')
-templates_path = os.path.join(resumepy_path, 'data', 'templates')
 
-def process_html(resume):
+def process_html(resume, templates_path):
     """Process the html version of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template('template.html')
@@ -56,7 +54,7 @@ def process_html(resume):
 
     print("-- resumepy: output in {}\n".format(os.path.join(cwd, "build","html")))
 
-def process_pdf(resume):
+def process_pdf(resume, templates_path):
     """Process the pdf/LaTeX version of the resume."""
     env = jinja2.Environment(
         block_start_string = '%{',
@@ -86,7 +84,7 @@ def process_pdf(resume):
 
     print("-- resumepy: output in {}\n".format(os.path.join(cwd, "build","pdf")))
 
-def process_text(resume):
+def process_text(resume, tempalates_path):
     """Process the text verion of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template('template.txt')
@@ -103,12 +101,20 @@ def process_text(resume):
 
 def main():
     """Entry point for ``resumepy`` script."""
+
+    resumepy_path = os.path.abspath(os.path.dirname(__file__))
+    data_path = os.path.join(resumepy_path, 'data')
+    templates_path = os.path.join(resumepy_path, 'data', 'templates')
+
     parser = argparse.ArgumentParser(description='Create resume from yaml file.')
-    parser.add_argument('-f', dest='file', help = 'input yaml file name',
+    parser.add_argument('-f', dest='file', help = 'input yaml file',
                         type = str, required = True)
     parser.add_argument('-o', dest='output', help ='output format',
                         choices = ['txt', 'html', 'pdf'],
                         type = str, required = True)
+    parser.add_argument('-t', dest='templates', help ='directory of templates',
+                        type = check_dir, default=templates_path,
+                        required = False)
     parser.add_argument('--no_address', help ='do not include mailing address',
                         dest='no_address', action='store_true', default=False,
                         required = False)
@@ -127,11 +133,12 @@ def main():
     resume['no_phone'] = args.no_phone
     resume['no_email'] = args.no_email
 
+
     if args.output == 'txt':
-        process_text(resume)
+        process_text(resume, args.templates)
     elif args.output == 'html':
-        process_html(resume)
+        process_html(resume, args.templates)
     elif args.output == 'pdf':
-        process_pdf(resume)
+        process_pdf(resume, args.templates)
 
 

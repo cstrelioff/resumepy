@@ -21,7 +21,14 @@ from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,
 import os
 import contextlib
 import shutil
- 
+
+def check_dir(path):
+    """Check that directory exists for argparse."""
+    if os.path.exists(path):
+        return path
+    else:
+        raise Exception("Directory: **{}** does not exist!".format(path))
+
 def copy_file(src, dest):
     try:
         shutil.copy(src, dest)
