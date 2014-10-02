@@ -31,6 +31,34 @@ from .utils import copy_file
 from .utils import mkdirs
 
 
+def create_parser():
+    """Create argparse parser and define project paths."""
+
+    resumepy_path = os.path.abspath(os.path.dirname(__file__))
+    data_path = os.path.join(resumepy_path, 'data')
+    templates_path = os.path.join(resumepy_path, 'data', 'templates')
+
+    parser = argparse.ArgumentParser(description='Create resume from yaml file.')
+    parser.add_argument('-f', dest='file', help = 'input yaml file',
+                        type = str, required = True)
+    parser.add_argument('-o', dest='output', help ='output format',
+                        choices = ['txt', 'html', 'pdf'],
+                        type = str, required = True)
+    parser.add_argument('-t', dest='templates', help ='directory of templates',
+                        type = check_dir, default=templates_path,
+                        required = False)
+    parser.add_argument('--no_address', help ='do not include mailing address',
+                        dest='no_address', action='store_true', default=False,
+                        required = False)
+    parser.add_argument('--no_phone', help ='do not include phone number',
+                        dest='no_phone', action='store_true', default=False,
+                        required = False)
+    parser.add_argument('--no_email', help ='do not include email',
+                        dest='no_email', action='store_true', default=False,
+                        required = False)
+
+    return parser
+
 def process_html(resume, templates_path):
     """Process the html version of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
@@ -102,28 +130,7 @@ def process_text(resume, tempalates_path):
 def main():
     """Entry point for ``resumepy`` script."""
 
-    resumepy_path = os.path.abspath(os.path.dirname(__file__))
-    data_path = os.path.join(resumepy_path, 'data')
-    templates_path = os.path.join(resumepy_path, 'data', 'templates')
-
-    parser = argparse.ArgumentParser(description='Create resume from yaml file.')
-    parser.add_argument('-f', dest='file', help = 'input yaml file',
-                        type = str, required = True)
-    parser.add_argument('-o', dest='output', help ='output format',
-                        choices = ['txt', 'html', 'pdf'],
-                        type = str, required = True)
-    parser.add_argument('-t', dest='templates', help ='directory of templates',
-                        type = check_dir, default=templates_path,
-                        required = False)
-    parser.add_argument('--no_address', help ='do not include mailing address',
-                        dest='no_address', action='store_true', default=False,
-                        required = False)
-    parser.add_argument('--no_phone', help ='do not include phone number',
-                        dest='no_phone', action='store_true', default=False,
-                        required = False)
-    parser.add_argument('--no_email', help ='do not include email',
-                        dest='no_email', action='store_true', default=False,
-                        required = False)
+    parser = create_parser()
     args = parser.parse_args()
 
     with open(args.file) as f:
@@ -133,7 +140,6 @@ def main():
     resume['no_phone'] = args.no_phone
     resume['no_email'] = args.no_email
 
-
     if args.output == 'txt':
         process_text(resume, args.templates)
     elif args.output == 'html':
@@ -141,4 +147,6 @@ def main():
     elif args.output == 'pdf':
         process_pdf(resume, args.templates)
 
+if __name__ == '__main__':
+    main()
 
