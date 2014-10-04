@@ -16,6 +16,8 @@ from .process import create_parser
 from .process import process_html
 from .process import process_pdf
 from .process import process_text
+from .process import resumepy_path
 
-__all__ = ['create_parser', 'process_html', 'process_pdf', 'process_text']
+__all__ = ['create_parser', 'process_html', 'process_pdf', 'process_text',
+           'resumepy_path']
 
