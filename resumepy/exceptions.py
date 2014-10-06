@@ -11,15 +11,27 @@
 Exceptions for the resumepy packge.
 """
 
+
 class resumepyException(Exception):
     """Root resumepy Exception."""
     pass
+
+
+class CreateDirError(resumepyException):
+    """Exception raised for error creating directory."""
+    pass
+
+
+class CreateFileError(resumepyException):
+    """Exception raised for error creating file."""
+    pass
+
 
 class DirError(resumepyException):
     """Exception raised for error finding directory."""
     pass
 
+
 class FileError(resumepyException):
     """Exception raised for error finding file."""
     pass
-
