@@ -27,6 +27,7 @@ import yaml
 import jinja2
 
 from .utils import check_dir
+from .utils import check_file
 from .utils import copy_file
 from .utils import mkdirs
 
@@ -39,7 +40,7 @@ def create_parser():
 
     parser = argparse.ArgumentParser(description='Create resume from yaml file.')
     parser.add_argument('-f', dest='file', help = 'input yaml file',
-                        type = str, required = True)
+                        type = check_file, required = True)
     parser.add_argument('-o', dest='output', help ='output format',
                         choices = ['txt', 'html', 'pdf'],
                         type = str, required = True)
