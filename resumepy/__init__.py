@@ -11,6 +11,11 @@
 The resumepy package.
 
 """
+from .exceptions import resumepyException  # noqa
+from .exceptions import CreateDirError  # noqa
+from .exceptions import CreateFileError  # noqa
+from .exceptions import DirError  # noqa
+from .exceptions import FileError  # noqa
 
 from .process import create_parser
 from .process import process_html
