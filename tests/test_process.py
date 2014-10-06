@@ -20,12 +20,14 @@ import shutil
 import yaml
 from resumepy import process_html, resumepy_path
 
+
 class ResumepyProcessHtmlTest(unittest.TestCase):
     """Test the resumepy function process_html."""
 
     def setUp(self):
         """Setup test."""
         self.tempdir = tempfile.mkdtemp()
+        self.cwd = os.getcwd()
         self.yaml = """contact:
   name: Jane Doe
   address: 555 Beverly Hills Blvd.
@@ -57,29 +59,15 @@ work:
       - Helped lead an amazing team
         """
         self.resume = yaml.load(self.yaml)
+        os.chdir(self.tempdir)
 
     def tearDown(self):
         """TearDown test."""
         shutil.rmtree(self.tempdir)
+        os.chdir(self.cwd)
 
     def test_process_html_valid(self):
         """Working process_html call."""
-        #print("\ntmpdir: {}\n".format(self.tempdir))
-        #print("resume: {}\n".format(self.resume))
-
-        cwd = os.getcwd()
-        os.chdir(self.tempdir)
-        process_html(self.resume, os.path.join(resumepy_path, 'data', 'templates'))
+        process_html(self.resume,
+                     os.path.join(resumepy_path, 'data', 'templates'))
         self.assertTrue(os.path.exists('build/html/resume.html'))
-        
-        #print("after process html...\n")
-        #print("cwd: {}".format(os.getcwd()))
-        #print(" ls . : {}".format(os.listdir('.')))
-        #print(" ls build/ : {}".format(os.listdir('build')))
-        #print(" ls build/html/ : {}".format(os.listdir('build/html')))
-
-        os.chdir(cwd)
-
-
-
-
