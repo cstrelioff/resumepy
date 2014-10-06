@@ -14,7 +14,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,
+from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,  # noqa
                              int, map, next, oct, open, pow, range, round,
                              str, super, zip)
 
@@ -23,12 +23,25 @@ import contextlib
 import shutil
 import tempfile
 
+from .exceptions import DirError
+from .exceptions import FileError
+
+
 def check_dir(path):
     """Check that directory exists for argparse."""
     if os.path.exists(path):
         return path
     else:
-        raise Exception("Directory: **{}** does not exist!".format(path))
+        raise DirError("Template directory `{}` does not exist.".format(path))
+
+
+def check_file(file):
+    """Check that a file exists for argparse."""
+    if os.path.isfile(file):
+        return file
+    else:
+        raise FileError("Unable to find/open `{}`".format(file))
+
 
 def copy_file(src, dest):
     try:
@@ -39,6 +52,7 @@ def copy_file(src, dest):
     except IOError as e:
         print("Error: {}".format(e.strerror))
         print("src: {} dest: {}".format(src, dest))
+
 
 def mkdirs(path):
     """Make all directories in path.
@@ -58,6 +72,7 @@ def mkdirs(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
+
 @contextlib.contextmanager
 def make_temp_directory():
     """Context for temporary directories.
@@ -71,4 +86,3 @@ def make_temp_directory():
     temp_dir = tempfile.mkdtemp()
     yield temp_dir
     shutil.rmtree(temp_dir)
-
