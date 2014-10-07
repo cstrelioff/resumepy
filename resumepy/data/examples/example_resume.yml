@@ -29,19 +29,21 @@ education:
     graduation: 2007
 additional_education:
   - schoolname: City C Community College
+    description: Class
     course: Spanish for Computers
     completed: Aug -- Sep 2012
-    topics: audio processing, conversational Spanish, automated slang in Spanish.
+    notes:
+      - "Topics: audio processing, conversational Spanish, automated slang in Spanish."
 work:
-  - organization: Babbling Computers
+  - organization: Babbling Computers, Inc.
     start: 2012
     stop: current
-    position: CTO and Head of Machine Talking Division
+    position: "CTO, Head of Machine Talking Division"
     location: San Jose, CA
     notes:
       - "Co-founded company as CTO and head of Machine Talking Division"
       - Lead a team of 20 engineers and scientists
-  - organization: Old School Talking Computers
+  - organization: Old School Talking Computers, Inc.
     start: 2010
     stop: 2012
     position: Computer Talking Engineer
