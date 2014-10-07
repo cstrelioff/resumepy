@@ -3,20 +3,21 @@
 \tikzstyle{work}=[minimum height=2em, minimum width=7.2in, text width=7.2in, font=\bf]
 \node[work] (work) {\Large Work Experience};
 \end{tikzpicture}
-%{ for job in work %}
-\vskip0.1em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+
 \tikzstyle{j1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
 \tikzstyle{j2}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=left]
 \tikzstyle{j3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
 \tikzstyle{j4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right]
 \tikzstyle{j5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
-\node[j1] (w1%{{-job.position-%}}%{{-job.start-%}}) { %{{-job.position-%}} };
-\node[j2] (w2%{{-job.position-%}}%{{-job.start-%}}) [below=of w1%{{-job.position-%}}%{{-job.start-%}}] { %{{-job.organization-%}} };
-\node[j3] (w3%{{-job.position-%}}%{{-job.start-%}}) [right=of w1%{{-job.position-%}}%{{-job.start-%}}] { %{{-job.start%}} -- %{{job.stop-%}} };
-\node[j4] (w4%{{-job.position-%}}%{{-job.start-%}}) [below=of w3%{{-job.position-%}}%{{-job.start-%}}] { %{{-job.location-%}} };
+%{ for job in work %}
+\vskip0.1em
+\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\node[j1] (w1) { %{{-job.position-%}} };
+\node[j2] (w2) [below=of w1] { %{{-job.organization-%}} };
+\node[j3] (w3) [right=of w1] { %{{-job.start%}} -- %{{job.stop-%}} };
+\node[j4] (w4) [below=of w3] { %{{-job.location-%}} };
 %{- if job.notes %}
-\node[j5] [below=of w4%{{-job.position-%}}%{{-job.start-%}}.south west] { 
+\node[j5] [below=of w4.south west] { 
   \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
                   leftmargin=*]
 %{- for note in job.notes %}
