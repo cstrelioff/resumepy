@@ -14,14 +14,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,
+from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,  # noqa
                              int, map, next, oct, open, pow, range, round,
                              str, super, zip)
 
 import os
 import argparse
 import subprocess
-import contextlib
 
 import yaml
 import jinja2
@@ -33,31 +32,34 @@ from .utils import mkdirs
 
 resumepy_path = os.path.abspath(os.path.dirname(__file__))
 
+
 def create_parser():
     """Create argparse parser and define project paths."""
 
     templates_path = os.path.join(resumepy_path, 'data', 'templates')
 
-    parser = argparse.ArgumentParser(description='Create resume from yaml file.')
-    parser.add_argument('-f', dest='file', help = 'input yaml file',
-                        type = check_file, required = True)
-    parser.add_argument('-o', dest='output', help ='output format',
-                        choices = ['txt', 'html', 'pdf'],
-                        type = str, required = True)
-    parser.add_argument('-t', dest='templates', help ='directory of templates',
-                        type = check_dir, default=templates_path,
-                        required = False)
-    parser.add_argument('--no_address', help ='do not include mailing address',
+    parser = argparse.ArgumentParser(description='Create resume from '
+                                     'yaml file.')
+    parser.add_argument('-f', dest='file', help='input yaml file',
+                        type=check_file, required=True)
+    parser.add_argument('-o', dest='output', help='output format',
+                        choices=['txt', 'html', 'pdf'],
+                        type=str, required=True)
+    parser.add_argument('-t', dest='templates', help='directory of templates',
+                        type=check_dir, default=templates_path,
+                        required=False)
+    parser.add_argument('--no_address', help='do not include mailing address',
                         dest='no_address', action='store_true', default=False,
-                        required = False)
-    parser.add_argument('--no_phone', help ='do not include phone number',
+                        required=False)
+    parser.add_argument('--no_phone', help='do not include phone number',
                         dest='no_phone', action='store_true', default=False,
-                        required = False)
-    parser.add_argument('--no_email', help ='do not include email',
+                        required=False)
+    parser.add_argument('--no_email', help='do not include email',
                         dest='no_email', action='store_true', default=False,
-                        required = False)
+                        required=False)
 
     return parser
+
 
 def process_html(resume, templates_path):
     """Process the html version of the resume."""
@@ -71,26 +73,28 @@ def process_html(resume, templates_path):
         source_dir = os.path.join(data_path, d)
         target_dir = os.path.join('build', 'html', d)
         mkdirs(target_dir)
-        
+
         for f in os.listdir(source_dir):
             if os.path.isfile(os.path.join(source_dir, f)):
                 copy_file(os.path.join(source_dir, f), target_dir)
 
-    with open(os.path.join('build','html', 'resume.html'), 'w') as f:
+    with open(os.path.join('build', 'html', 'resume.html'), 'w') as f:
         f.write(template.render(resume))
-    
+
     cwd = os.getcwd()
 
-    print("-- resumepy: output in {}\n".format(os.path.join(cwd, "build","html")))
+    print("-- resumepy: output in {}\n".format(
+          os.path.join(cwd, "build", "html")))
+
 
 def process_pdf(resume, templates_path):
     """Process the pdf/LaTeX version of the resume."""
     env = jinja2.Environment(
-        block_start_string = '%{',
-        block_end_string = '%}',
-        variable_start_string = '%{{',
-        variable_end_string = '%}}',
-        loader = jinja2.FileSystemLoader(templates_path))
+        block_start_string='%{',
+        block_end_string='%}',
+        variable_start_string='%{{',
+        variable_end_string='%}}',
+        loader=jinja2.FileSystemLoader(templates_path))
 
     template = env.get_template('template.tex')
 
@@ -111,7 +115,9 @@ def process_pdf(resume, templates_path):
         raise Exception("-- resumepy: pdflatex failed."
                         "   Do you have Tex Live 2013 or 2014 availble?")
 
-    print("-- resumepy: output in {}\n".format(os.path.join(cwd, "build","pdf")))
+    print("-- resumepy: output in {}\n".format(
+          os.path.join(cwd, "build", "pdf")))
+
 
 def process_text(resume, templates_path):
     """Process the text verion of the resume."""
@@ -126,7 +132,9 @@ def process_text(resume, templates_path):
         f.write(template.render(resume))
 
     cwd = os.getcwd()
-    print("-- resumepy: output in {}\n".format(os.path.join(cwd, "build","txt")))
+    print("-- resumepy: output in {}\n".format(
+          os.path.join(cwd, "build", "txt")))
+
 
 def main():
     """Entry point for ``resumepy`` script."""
@@ -148,6 +156,6 @@ def main():
     elif args.output == 'pdf':
         process_pdf(resume, args.templates)
 
+
 if __name__ == '__main__':
     main()
-
