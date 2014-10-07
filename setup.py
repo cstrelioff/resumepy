@@ -38,13 +38,15 @@ setup(
     keywords='resume YAML HTML LaTeX',
     packages=['resumepy'],
     package_data = {'resumepy': ['data/css/*',
+                                 'data/examples/*',
                                  'data/fonts/*',
                                  'data/js/*',
                                  'data/templates/*',
                                  'data/yaml/*']},
     install_requires=['future', 'jinja2', 'pyyaml'],
     entry_points={
-        'console_scripts': ['resumepy=resumepy.process:main'],
+        'console_scripts': ['resumepy=resumepy.process:main',
+                            'resumepy_example=resumepy.utils:copy_example'],
     },
 )
 

@@ -26,6 +26,7 @@ import tempfile
 from .exceptions import DirError
 from .exceptions import FileError
 
+resumepy_path = os.path.abspath(os.path.dirname(__file__))
 
 def check_dir(path):
     """Check that directory exists for argparse."""
@@ -41,6 +42,14 @@ def check_file(file):
         return file
     else:
         raise FileError("Unable to find/open `{}`".format(file))
+
+
+def copy_example():
+    """Copy example yaml resume to current working directory."""
+    print("-- resumepy: copying example_resume.yml to current directory...")
+
+    src = os.path.join(resumepy_path, "data", "examples", "example_resume.yml")
+    copy_file(src, os.getcwd())
 
 
 def copy_file(src, dest):

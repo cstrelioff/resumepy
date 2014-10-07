@@ -1,0 +1,118 @@
+fontsize: 10pt
+contact:
+  name: Jane,Joe Expert
+  address: 999 One Street
+  city: Any City
+  state: Any State
+  zip: 99999
+  email: jane-joe@expert.com
+  phone: 999.999.9999
+  jobtitle: Expert
+online:
+  - site: website, fake
+    link: expert.com
+  - site: blog, fake
+    link: expert.com/blog
+  - site: github, fake
+    link: github.com/jane,joe_expert
+  - site: linkedin, fake
+    link: www.linkedin.com/in/jane,joe_expert
+summary: A physicist by training, I have substantial experience applying scientific reasoning, mathematical manipulation, programming chops and statistics know-how to problems in many areas. I am actively looking for a position as a data scientist, or a similar position, at a Bay Area company.
+education:
+  - schoolname: School A+
+    degree: MS, MBA, MD, PhD, JD
+    focus: Everything
+    graduation: 2014
+  - schoolname: Another A+ School
+    degree: BA, BS
+    focus: Expert Systems
+    graduation: 2013
+additional_education:
+  - schoolname: Coursera
+    course: Introduction to Machine Learning
+    completed: Jun -- Sep 2014
+    topics: Octave, linear regression, logistic regression, neural networks, support vector machines, PCA, anomaly detection, collaborative filtering.
+  - schoolname: Coursera
+    course: Introduction to Data Science
+    completed: Jun -- Sep 2014
+    topics: Twitter (sentiment analysis), SQL, NoSQL (hadoop/pig using AWS), map reduce in Python, visualization with Tableau, machine learning with R.
+work:
+  - organization: University of California at Davis
+    start: Nov 2013
+    stop: Mar 2014
+    position: Programmer IV
+    location: Davis, CA
+    notes:
+      - Developed inference pipeline to calculate Bayesian posterior probabilities for millions of candidate unifilar Hidden Markov Models (uHMMs). The multi-threaded Python implementation allowed for more efficient use of multi-cpu nodes on a Linux cluster running Slurm.
+  - organization: University of California at Davis
+    start: 2012
+    stop: 2013
+    position: Postdoc
+    location: Davis, CA
+    notes:
+      - Derived analytic results for Bayesian inference of uHMMs from data. Implemented these methods, including parameter inference and model comparison for different uHMM topologies, in the CMPy Python package.
+  - organization: University of California at Los Angeles
+    start: 2010
+    stop: 2012
+    position: Postdoc
+    location: Los Angeles, CA
+    notes:
+      - Created a Bayesian state-space model to analyze influenza data from pigs, including inference of missing observations.
+      - Inferred parameters of model using Python and PyMC on a Linux cluster running Sun (Oracle) Grid Engine.
+  - organization: Michigan State University
+    start: 2007
+    stop: 2010
+    position: Postdoc
+    location: East Lansing, MI
+    notes:
+      - Implemented stochastic model in C++ to infer mutation rates and fitness effect of mutations from experimental data.
+      - Developed Python code to create and analyze social networks from observations of a Hyena population in Kenya.
+  - organization: University of Illinois at Urbana-Champaign
+    start: 2000
+    stop: 2007
+    position: Graduate Researcher
+    location: Urbana, IL
+  - organization: eToys
+    start: 1999
+    stop: 2000
+    position: Planner
+    location: Los Angeles, CA
+  - organization: Border's Books and Music
+    start: 1995
+    stop: 1999
+    position: Book/Music Seller and Special Orders
+    location: Santa Monica, CA
+publications:
+    - title: Bayesian structural inference for hidden processes
+      authors: CC Strelioff, JP Crutchfield
+      journal: Physical Review E
+      year: 2014
+    - title: Inferring patterns of influenza transmission in swine from multiple streams of surveillance data
+      authors: CC Strelioff, D Vijaykrishna, S Riley, Y Guan, JSM Peiris, JO Lloyd-Smith
+      journal: Proceedings of the Royal Society B
+      year: 2013
+    - title: Society, demography and genetic structure in the spotted hyena
+      authors: KE Holekamp, JE Smith, CC Strelioff, RC Van Horn, HE Watts 
+      journal: Moleculary Ecology
+      year: 2012
+    - title: Evolutionary dynamics, epistatic interactions, and biological information
+      authors: CC Strelioff, C Ofria and RE Lenski
+      journal: Journal of Theoretical Biology
+      year: 2010
+    - title: Escherichia coli rpoB mutants have increased evolvability in proportion to their fitness defects
+      authors: JE Barrick, MR Kauth, CC Strelioff, RE Lenski
+      journal: Molecular Biology and Evolution
+      year: 2010
+    - title: Optimal instruments and models for noisy chaos
+      authors: CC Strelioff, JP Crutchfield
+      journal: Chaos
+      year: 2007
+    - title: "Inferring Markov chains: Bayesian estimation, model comparison, entropy rate, and out-of-class modeling"
+      authors: CC Strelioff, JP Crutchfield, AW Hubler
+      journal: Physical Review E
+      year: 2007
+    - title: Medium-term prediction of chaos
+      authors: CC Strelioff, AW Hubler
+      journal: Physical Review Letters
+      year: 2006
+

@@ -23,5 +23,7 @@ from .process import process_pdf
 from .process import process_text
 from .process import resumepy_path
 
+from .utils import copy_example
+
 __all__ = ['create_parser', 'process_html', 'process_pdf', 'process_text',
-           'resumepy_path']
+           'resumepy_path', 'copy_example']
