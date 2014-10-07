@@ -25,4 +25,3 @@ from .process import resumepy_path
 
 __all__ = ['create_parser', 'process_html', 'process_pdf', 'process_text',
            'resumepy_path']
-
