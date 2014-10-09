@@ -7,13 +7,13 @@
 \renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
 
-\usepackage{tikz}
-\usetikzlibrary{positioning}
 \usepackage{tikz,enumitem,setspace,kantlipsum}
+\usetikzlibrary{positioning}
+
 \usepackage{calc}
 \usepackage[paper=letterpaper, includefoot,
             top=0.5in, bottom=0.5in, 
-            left=0.5in, right=0.5in]{geometry}
+            left=0.65in, right=0.65in]{geometry}
 
 \setlength{\parindent}{0in}
 
@@ -34,12 +34,14 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% PDF bookmarks
-\usepackage{color,hyperref}
-\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
-\hypersetup{colorlinks, breaklinks,
-            linkcolor=darkblue, urlcolor=darkblue,
-            anchorcolor=darkblue, citecolor=darkblue}
+% PDF
+\usepackage{hyperref}
+\hypersetup{
+pdfstartview={FitH},
+pdftitle={ Resume :: %{{contact.name %}} },
+pdfauthor={ %{{contact.name %}} },
+pdfsubject={Resume for %{{ contact.name %}}},
+pdfcreator={pdflatex, resumepy},
+pdfproducer={pdflatex, resumepy}
+}
 
-\title{Resume for %{{ contact.name %}} }
-\author{ %{{contact.name%}} }
