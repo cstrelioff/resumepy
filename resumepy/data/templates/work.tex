@@ -1,29 +1,31 @@
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, inner sep=0em, outer sep=0em]
 \tikzstyle{work}=[minimum height=2em, minimum width=7.2in, text width=7.2in, font=\bf]
-\node[work] (work) {\Large Work Experience};
+\node[work] (work) {\Large Experience};
 \end{tikzpicture}
 
-\tikzstyle{j1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
-\tikzstyle{j2}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=left]
-\tikzstyle{j3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
-\tikzstyle{j4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right]
+\tikzstyle{j1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left, anchor=north west]
+\tikzstyle{j2}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=left, anchor=north west]
+\tikzstyle{j3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right, anchor=north west]
+\tikzstyle{j4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right, anchor=north west]
 \tikzstyle{j5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
+\tikzstyle{j6}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, font=\it, anchor=north west]
 %{ for job in work %}
 \vskip0.1em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\node[j1] (w1) { %{{-job.position-%}} };
-\node[j2] (w2) [below=of w1] { %{{-job.organization-%}} };
-\node[j3] (w3) [right=of w1] { %{{-job.start%}} -- %{{job.stop-%}} };
-\node[j4] (w4) [below=of w3] { %{{-job.location-%}} };
+\node[j1] at (0in, 0em)      { %{{-job.position-%}} };
+\node[j2] at (0in,-1.6em)    { %{{-job.organization-%}} };
+\node[j3] at (3.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
+\node[j4] at (3.6in, -1.6em) { %{{-job.location-%}} };
+\node[j6] at (0in, -3.2em)   { %{{-job.summary-%}}  };
 %{- if job.notes %}
-\node[j5] [below=of w4.south west] { 
+\node[j5] at (0in, -4.8em) { 
   \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
                   leftmargin=*]
 %{- for note in job.notes %}
     \item %{{ note %}}
 %{- endfor %}
-  \end{itemize}\par};
+  \end{itemize}};
 %{- endif %}
 \end{tikzpicture}
 %{ endfor %}
