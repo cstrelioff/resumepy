@@ -1,23 +1,25 @@
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, inner sep=0em, outer sep=0em]
-\tikzstyle{edu}=[minimum height=2em, minimum width=7.5in, text width=7.5in, font=\bf]
-\node[edu] (education) {\Large Education};
+\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!20, outer sep=0.5em]
+\tikzstyle{edu}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf]
+\node[deco] (dec1) {};
+\node[edu]  (education) [right=of dec1] {\Large Education};
 \end{tikzpicture}
 
-\tikzstyle{f1}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
-\tikzstyle{f2}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, align=left]
-\tikzstyle{f3}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
-\tikzstyle{f4}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, align=right]
+\tikzstyle{f1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
+\tikzstyle{f2}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=left]
+\tikzstyle{f3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
+\tikzstyle{f4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right]
 \tikzstyle{c1}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for school in education %}
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\node[f1] (s1) { %{{school.degree%}} };
-\node[f2] (s2) [below=of s1] { %{{school.focus%}} };
-\node[f3] (s3) [right=of s1] { %{{school.graduation%}} };
-\node[f4] (s4) [below=of s3] { %{{school.schoolname%}} };
+\node[f1] at (0in, 0em) { %{{school.degree%}} };
+\node[f2] at (0in, -1.6em) { %{{school.focus%}} };
+\node[f3] at (3.6in, 0em) { %{{school.graduation%}} };
+\node[f4] at (3.6in, -1.6em) { %{{school.schoolname%}} };
 
 %{- if school.notes %}
-\node[c1] [below=of s4.south west] { 
+\node[c1] at (0in, -3.2em) { 
   \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
                   leftmargin=*]
 %{- for note in school.notes %}
