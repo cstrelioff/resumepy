@@ -1,10 +1,12 @@
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
-\tikzstyle{ref1}=[minimum height=2em, minimum width=7.6in, text width=7.6in, font=\bf, align=left]
-\node[ref1] (references) {\Large References};
+\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
+\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
+\tikzstyle{ref1}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, align=left, text=black!50]
+\node[deco] (deco1) {};
+\node[ref1] (references) [right=of deco1] {\Large References};
 \end{tikzpicture}
 
 \begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
-\tikzstyle{ref2}=[minimum height=1em, minimum width=7.4in, text width=7.4in, align=left]
+\tikzstyle{ref2}=[minimum height=1em, minimum width=7.2in, text width=7.2in, align=left]
 \node[ref2] (references2) [below=of references] {Available upon request. };
 \end{tikzpicture}
