@@ -7,19 +7,19 @@
 \node[edu]  (certificates) [right=of deco1] {\Large Additional Coursework};
 \end{tikzpicture}
 
-\tikzstyle{c1}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
-\tikzstyle{c2}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, align=left]
-\tikzstyle{c3}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, font=\bf, align=right]
-\tikzstyle{c4}=[minimum height=1.5em, minimum width=3.6in, text width=3.6in, align=right]
+\tikzstyle{c1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left, anchor=north west]
+\tikzstyle{c2}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=left, anchor=north west]
+\tikzstyle{c3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right, anchor=north west]
+\tikzstyle{c4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right, anchor=north west]
 \tikzstyle{c5}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for school in additional_education %}
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\node[c1] (c1) { %{{school.description%}} };
-\node[c2] (c2) [below=of c1] { %{{school.course%}} };
-\node[c3] (c3) [right=of c1] { %{{school.completed%}} };
-\node[c4] (c4) [below=of c3] { %{{school.schoolname%}} };
+\node[c1] at (0in, 0em) { %{{school.description%}} };
+\node[c2] at (0in, -1.6em) { %{{school.course%}} };
+\node[c3] at (3.6in, 0em) { %{{school.completed%}} };
+\node[c4] at (3.6in, -1.6em) { %{{school.schoolname%}} };
 %{- if school.notes %}
-\node[c5] [below=of c4.south west] { 
+\node[c5] at (0in, -3.2em) {
   \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
                   leftmargin=*]
     %{- for note in school.notes %}
