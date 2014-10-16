@@ -36,7 +36,6 @@ resumepy_path = os.path.abspath(os.path.dirname(__file__))
 def create_parser():
     """Create argparse parser and define project paths."""
 
-    templates_path = os.path.join(resumepy_path, 'data', 'templates')
 
     parser = argparse.ArgumentParser(description='Create resume from '
                                      'yaml file.')
@@ -45,9 +44,8 @@ def create_parser():
     parser.add_argument('-o', dest='output', help='output format',
                         choices=['txt', 'html', 'pdf'],
                         type=str, required=True)
-    parser.add_argument('-t', dest='templates', help='directory of templates',
-                        type=check_dir, default=templates_path,
-                        required=False)
+    parser.add_argument('-t', dest='template', help='local template',
+                        type=check_file, required=False, default=None)
     parser.add_argument('--no_address', help='do not include mailing address',
                         dest='no_address', action='store_true', default=False,
                         required=False)
@@ -87,7 +85,7 @@ def process_html(resume, templates_path):
           os.path.join(cwd, "build", "html")))
 
 
-def process_pdf(resume, templates_path):
+def process_pdf(resume, templates_path, template_filename):
     """Process the pdf/LaTeX version of the resume."""
     env = jinja2.Environment(
         block_start_string='%{',
@@ -96,7 +94,7 @@ def process_pdf(resume, templates_path):
         variable_end_string='%}}',
         loader=jinja2.FileSystemLoader(templates_path))
 
-    template = env.get_template('template.tex')
+    template = env.get_template(template_filename)
 
     mkdirs(os.path.join('build', 'pdf'))
 
@@ -149,12 +147,23 @@ def main():
     resume['no_phone'] = args.no_phone
     resume['no_email'] = args.no_email
 
+    templates_path = os.path.join(resumepy_path, 'data', 'templates')
+    if args.template:
+        template_file = args.template
+        templates = ['.', templates_path]
+    else:
+        if args.output == 'pdf':
+            template_file = 'template.{}'.format('tex')
+        else:
+            template_file = 'template.{}'.format(args.output)
+        templates = templates_path
+
     if args.output == 'txt':
-        process_text(resume, args.templates)
+        process_text(resume, templates)
     elif args.output == 'html':
-        process_html(resume, args.templates)
+        process_html(resume, templates)
     elif args.output == 'pdf':
-        process_pdf(resume, args.templates)
+        process_pdf(resume, templates, template_file)
 
 
 if __name__ == '__main__':
