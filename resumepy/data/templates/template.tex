@@ -141,6 +141,74 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 %{- endblock summary %}
 
+%{ block skills %}
+%{- if skills %}
+\vskip0.5em
+\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
+\tikzstyle{edu}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
+\node[deco] (deco1) {};
+\node[edu]  (certificates) [right=of deco1] {\Large Core Skills};
+\end{tikzpicture}
+
+\tikzstyle{c1}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, font=\bf, align=left, anchor=north west]
+\tikzstyle{c5}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
+%{ for skill in skills %}
+\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\node[c1] at (0in, 0em) { %{{ skill.name %}} };
+%{- if skill.description %}
+\node[c5] at (0in, -1.6em) {
+  \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
+                  leftmargin=*]
+    %{- for item in skill.description  %}
+    \item  %{{ item %}} 
+    %{- endfor %}
+  \end{itemize}\par};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{ endif %}
+
+%{ endblock skills %}
+
+%{ block  work %}
+\vskip0.5em
+\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
+\tikzstyle{work}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
+\node[deco] (dec1) {};
+\node[work] (work) [right=of dec1] {\Large Work Experience};
+\end{tikzpicture}
+
+\tikzstyle{j1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left, anchor=north west]
+\tikzstyle{j2}=[minimum height=1.6em, minimum width=4.6in, text width=4.6in, align=left, anchor=north west]
+\tikzstyle{j3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right, anchor=north west]
+\tikzstyle{j4}=[minimum height=1.6em, minimum width=2.6in, text width=2.6in, align=right, anchor=north west]
+\tikzstyle{j5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
+%{ for job in work %}
+\vskip0.1em
+\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\node[j1] at (0em, 0em)      { %{{-job.position-%}} };
+%{- if job.extra %}
+\node[j2] at (0em,-1.6em)    { %{{-job.organization%}} -- %{{job.extra-%}} };
+%{- else %}
+\node[j2] at (0em,-1.6em)    { %{{-job.organization-%}} };
+%{- endif %}
+\node[j3] at (3.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
+\node[j4] at (4.6in, -1.6em) { %{{-job.location-%}} };
+%{- if job.notes %}
+\node[j5] at (0in, -3.2em) { 
+\begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
+                leftmargin=*]
+%{- for note in job.notes %}
+    \item %{{ note %}}
+%{- endfor %}
+  \end{itemize}};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endblock work %}
+
 %{ block education %}
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
@@ -174,44 +242,6 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 %{ endfor %}
 %{- endblock education %}
-
-%{ block  work %}
-\vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{work}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
-\node[deco] (dec1) {};
-\node[work] (work) [right=of dec1] {\Large Experience};
-\end{tikzpicture}
-
-\tikzstyle{j1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left, anchor=north west]
-\tikzstyle{j2}=[minimum height=1.6em, minimum width=4.6in, text width=4.6in, align=left, anchor=north west]
-\tikzstyle{j3}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=right, anchor=north west]
-\tikzstyle{j4}=[minimum height=1.6em, minimum width=2.6in, text width=2.6in, align=right, anchor=north west]
-\tikzstyle{j5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
-%{ for job in work %}
-\vskip0.1em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\node[j1] at (0em, 0em)      { %{{-job.position-%}} };
-%{- if job.extra %}
-\node[j2] at (0em,-1.6em)    { %{{-job.organization%}} -- %{{job.extra-%}} };
-%{- else %}
-\node[j2] at (0em,-1.6em)    { %{{-job.organization-%}} };
-%{- endif %}
-\node[j3] at (3.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
-\node[j4] at (4.6in, -1.6em) { %{{-job.location-%}} };
-%{- if job.notes %}
-\node[j5] at (0in, -3.2em) { 
-\begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
-                leftmargin=*]
-%{- for note in job.notes %}
-    \item %{{ note %}}
-%{- endfor %}
-  \end{itemize}};
-%{- endif %}
-\end{tikzpicture}
-%{ endfor %}
-%{- endblock work %}
 
 %{ block additional_education %}
 %{- if additional_education %}
