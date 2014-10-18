@@ -51,93 +51,20 @@ pdfproducer={pdflatex, resumepy}
 
 %{ block contact %}
 \begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
-\tikzstyle{header}=[minimum height=2em, minimum width=7.2in, text width=7.2in, font=\bf, align=left, text=black!50]
-\node[header] (name) {\LARGE %{{contact.name-%}} };
+\tikzstyle{header}=[minimum height=3.2em, minimum width=4.7in, text width=4.7in, font=\bf, align=left, text=black!50, anchor=north west]
+\tikzstyle{htag}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, font=\bf, align=left, text=black!50, anchor=north west]
+\tikzstyle{col}=[minimum height=1.6em, minimum width=2.5in, text width=2.5in, align=left, anchor=north west]
+\node[header] (hdr)   at (0in, 0.0em)    {\Huge %{{contact.name-%}} };
+\node[htag]   (hdrt)  at (0in, -3.2em)   {\Large %{{contact.city%}}, %{{contact.state%}} -- %{{contact.email %}} -- %{{ contact.phone %}} };
+\draw[black!50, dotted, ultra thick] (0in, -5em) -- (7.2in, -5em);
 \end{tikzpicture}
-
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
-\tikzstyle{col}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=left]
-%{- if (no_phone) and (no_email) and (no_address) %}
-\node[col] at (0em,0.0em)  {  };
-\node[col] at (0em,-1.6em) {  };
-\node[col] at (0em,-3.2em) {  };
-\node[col] at (0em,-4.8em) {  };
-%{- for website in online %}
-\node[col] at (0em,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (no_phone) and (no_email) and (not no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
-\node[col] at (0em,-1.6em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
-\node[col] at (0em,-3.2em) {  };
-\node[col] at (0em,-4.8em) {  };
-%{- for website in online %}
-\node[col] at (3.75in,-%{{- (loop.index - 1)*1.5 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (no_phone) and (not no_email) and (no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.email %}} };
-\node[col] at (0em,-1.6em) {  };
-\node[col] at (0em,-3.2em) {  };
-\node[col] at (0em,-4.8em) {  };
-%{- for website in online %}
-\node[col] at (3.6in,-%{{- (loop.index - 1)*1.6 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (no_phone) and (not no_email) and (not no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
-\node[col] at (0em,-1.6em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
-\node[col] at (0em,-3.2em) { %{{ contact.email %}} };
-\node[col] at (0em,-4.6em) {  };
-%{- for website in online %}
-\node[col] at (3.6in,-%{{- (loop.index - 1)*1.6 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (not no_phone) and (no_email) and (no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.phone %}} };
-\node[col] at (0em,-1.6em) {  };
-\node[col] at (0em,-3.2em) {  };
-\node[col] at (0em,-4.8em) {  };
-%{- for website in online %}
-\node[col] at (3.6in,-%{{- (loop.index - 1)*1.6 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (not no_phone) and (no_email) and (not no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
-\node[col] at (0em,-1.6em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
-\node[col] at (0em,-3.2em) { %{{ contact.phone %}} };
-\node[col] at (0em,-4.8em) {  };
-%{- for website in online %}
-\node[col] at (3.6in,-%{{- (loop.index - 1)*1.6 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (not no_phone) and (not no_email) and ( no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.phone %}} };
-\node[col] at (0em,-1.6em) { %{{ contact.email %}} };
-\node[col] at (0em,-3.2em) {  };
-\node[col] at (0em,-4.8em) {  };
-%{- for website in online %}
-\node[col] at (3.6in,-%{{- (loop.index - 1)*1.6 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- elif (not no_phone) and (not no_email) and (not no_address) %}
-\node[col] at (0em,0.0em)  { %{{ contact.address %}} };
-\node[col] at (0em,-1.6em) { %{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}} };
-\node[col] at (0em,-3.2em) { %{{ contact.phone %}} };
-\node[col] at (0em,-4.8em) { %{{ contact.email %}} };
-%{- for website in online %}
-\node[col] at (3.6in,-%{{- (loop.index - 1)*1.6 -%}}em) {\textbf{%{{-website.site-%}}:} {\tt {%{{-website.link-%}}} } };
-%{- endfor %}
-%{- endif %}
-\end{tikzpicture}
-%{- endblock contact %}
+%{ endblock contact %}
 
 %{ block summary %}
-\vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{summ1}=[minimum height=2em, minimum width=7.2in-0.5em, text width=7.2in-0.5em, font=\bf, align=left, text=black!50]
-\node[deco] (dec1) {};
-\node[summ1] (summary1) [right=of dec1] {\Large Summary};
-\end{tikzpicture}
-
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
 \tikzstyle{summ2}=[minimum height=1em, minimum width=7.2in, text width=7.2in, align=left]
-\node[summ2] (summary2) [below=of summary1] { %{{-summary-%}} };
+\node[summ2] {  %{{summary-%}} };
 \end{tikzpicture}
 %{- endblock summary %}
 
@@ -145,15 +72,15 @@ pdfproducer={pdflatex, resumepy}
 %{- if skills %}
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{edu}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
-\node[deco] (deco1) {};
-\node[edu]  (certificates) [right=of deco1] {\Large Core Skills};
+\tikzstyle{skl}=[minimum height=2em, minimum width=3in, text width=3in, align=left, font=\bf, text=black!50]
+\node[skl] (skills) at (0em, 0em) {\Large Core Skills};
+\draw[black!50, dotted, ultra thick] (skills.south west) -- (skills.south east);
 \end{tikzpicture}
 
 \tikzstyle{c1}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, font=\bf, align=left, anchor=north west]
-\tikzstyle{c5}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
+\tikzstyle{c5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for skill in skills %}
+\vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
 \node[c1] at (0in, 0em) { %{{ skill.name %}} };
 %{- if skill.description %}
@@ -174,10 +101,9 @@ pdfproducer={pdflatex, resumepy}
 %{ block  work %}
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{work}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
-\node[deco] (dec1) {};
-\node[work] (work) [right=of dec1] {\Large Work Experience};
+\tikzstyle{exp}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, text=black!50]
+\node[exp] (experience) {\Large Experience};
+\draw[black!50, dotted, ultra thick] (experience.south west) -- (experience.south east);
 \end{tikzpicture}
 
 \tikzstyle{j1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left, anchor=north west]
@@ -212,10 +138,9 @@ pdfproducer={pdflatex, resumepy}
 %{ block education %}
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{edu}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
-\node[deco] (dec1) {};
-\node[edu]  (education) [right=of dec1] {\Large Education};
+\tikzstyle{edu}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, text=black!50]
+\node[edu]  (education) {\Large Education};
+\draw[black!50, dotted, ultra thick] (education.south west) -- (education.south east);
 \end{tikzpicture}
 
 \tikzstyle{f1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left]
@@ -247,10 +172,9 @@ pdfproducer={pdflatex, resumepy}
 %{- if additional_education %}
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{edu}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, text=black!50]
-\node[deco] (deco1) {};
-\node[edu]  (certificates) [right=of deco1] {\Large Additional Coursework};
+\tikzstyle{crt}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, text=black!50]
+\node[crt]  (certificates) {\Large Additional Coursework};
+\draw[black!50, dotted, ultra thick] (certificates.south west) -- (certificates.south east);
 \end{tikzpicture}
 
 \tikzstyle{c1}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf, align=left, anchor=north west]
@@ -279,35 +203,12 @@ pdfproducer={pdflatex, resumepy}
 
 %{ endblock additional_education %}
 
-%{ block publications %}
-\vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{pubs}=[minimum height=2em, minimum width=7.2in, text width=7.2in, font=\bf, text=black!50]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\node[deco] (deco1) {};
-\node[pubs] (publications) [right=of deco1] {\Large Publications};
-\end{tikzpicture}
-
-\vskip0.1em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
-\tikzstyle{p1}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in]
-\node[p1] { 
-  \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
-                  leftmargin=*]
-%{- for paper in publications %}
-    \item \textbf{ %{{- paper.title -%}} }, %{{ paper.authors -%}}, \textit{ %{{- paper.journal -%}} } (%{{- paper.year -%}})
-%{- endfor %}
-  \end{itemize}\par};
-\end{tikzpicture}
-%{- endblock publications %}
-
 %{ block references %}
 \vskip0.5em
 \begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
-\tikzstyle{deco}=[minimum height=2em, minimum width=1em, fill=black!50, outer sep=0.5em]
-\tikzstyle{ref1}=[minimum height=2em, minimum width=7.2in-1.5em, text width=7.2in-1.5em, font=\bf, align=left, text=black!50]
-\node[deco] (deco1) {};
-\node[ref1] (references) [right=of deco1] {\Large References};
+\tikzstyle{ref}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, align=left, text=black!50]
+\node[ref] (references) {\Large References};
+\draw[black!50, dotted, ultra thick] (references.south west) -- (references.south east);
 \end{tikzpicture}
 
 \begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
