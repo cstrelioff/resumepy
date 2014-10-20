@@ -8,8 +8,17 @@
 \renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
 
-\usepackage{tikz,enumitem,setspace,kantlipsum}
+\usepackage{tikz}
 \usetikzlibrary{positioning}
+\tikzset{% 
+    default picture/.style={%
+        font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em
+    }
+}
+
+\usepackage{enumitem}
+% set style for lists
+\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=$\bullet$, leftmargin=*}
 
 \usepackage{calc}
 \usepackage[paper=letterpaper, includefoot,
@@ -50,7 +59,7 @@ pdfproducer={pdflatex, resumepy}
 \begin{document}
 
 %{ block contact %}
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{header}=[minimum height=3.2em, minimum width=4.7in, text width=4.7in, font=\bf, align=left, text=black!50, anchor=north west]
 \tikzstyle{htag}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, font=\bf, align=left, text=black!50, anchor=north west]
 \tikzstyle{col}=[minimum height=1.6em, minimum width=2.5in, text width=2.5in, align=left, anchor=north west]
@@ -62,7 +71,7 @@ pdfproducer={pdflatex, resumepy}
 
 %{ block summary %}
 \vskip1em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{summ2}=[minimum height=1em, minimum width=7.2in, text width=7.2in, align=left]
 \node[summ2] {  %{{summary-%}} };
 \end{tikzpicture}
@@ -71,7 +80,7 @@ pdfproducer={pdflatex, resumepy}
 %{ block skills %}
 %{- if skills %}
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{skl}=[minimum height=2em, minimum width=3in, text width=3in, align=left, font=\bf, text=black!50]
 \node[skl] (skills) at (0em, 0em) {\Large Core Skills};
 \draw[black!50, dotted, ultra thick] (skills.south west) -- (skills.south east);
@@ -81,12 +90,11 @@ pdfproducer={pdflatex, resumepy}
 \tikzstyle{c5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for skill in skills %}
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \node[c1] at (0in, 0em) { %{{ skill.name %}} };
 %{- if skill.description %}
 \node[c5] at (0in, -1.6em) {
-  \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
-                  leftmargin=*]
+  \begin{itemize}
     %{- for item in skill.description  %}
     \item  %{{ item %}} 
     %{- endfor %}
@@ -100,9 +108,9 @@ pdfproducer={pdflatex, resumepy}
 
 %{ block  work %}
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{exp}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, text=black!50]
-\node[exp] (experience) {\Large Experience};
+\node[exp] (experience) {\Large Selected Experience};
 \draw[black!50, dotted, ultra thick] (experience.south west) -- (experience.south east);
 \end{tikzpicture}
 
@@ -113,7 +121,7 @@ pdfproducer={pdflatex, resumepy}
 \tikzstyle{j5}=[minimum height=1.6em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for job in work %}
 \vskip0.1em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \node[j1] at (0em, 0em)      { %{{-job.position-%}} };
 %{- if job.extra %}
 \node[j2] at (0em,-1.6em)    { %{{-job.organization%}} -- %{{job.extra-%}} };
@@ -124,8 +132,7 @@ pdfproducer={pdflatex, resumepy}
 \node[j4] at (4.6in, -1.6em) { %{{-job.location-%}} };
 %{- if job.notes %}
 \node[j5] at (0in, -3.2em) { 
-\begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
-                leftmargin=*]
+\begin{itemize}
 %{- for note in job.notes %}
     \item %{{ note %}}
 %{- endfor %}
@@ -137,7 +144,7 @@ pdfproducer={pdflatex, resumepy}
 
 %{ block education %}
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{edu}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, text=black!50]
 \node[edu]  (education) {\Large Education};
 \draw[black!50, dotted, ultra thick] (education.south west) -- (education.south east);
@@ -149,7 +156,7 @@ pdfproducer={pdflatex, resumepy}
 \tikzstyle{f4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right]
 \tikzstyle{c1}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for school in education %}
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \node[f1] at (0in, 0em) { %{{school.degree%}} };
 \node[f2] at (0in, -1.6em) { %{{school.focus%}} };
 \node[f3] at (3.6in, 0em) { %{{school.graduation%}} };
@@ -157,8 +164,7 @@ pdfproducer={pdflatex, resumepy}
 
 %{- if school.notes %}
 \node[c1] at (0in, -3.2em) { 
-  \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
-                  leftmargin=*]
+  \begin{itemize}
 %{- for note in school.notes %}
     \item %{{ note%}} 
 %{- endfor %}
@@ -171,7 +177,7 @@ pdfproducer={pdflatex, resumepy}
 %{ block additional_education %}
 %{- if additional_education %}
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{crt}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, text=black!50]
 \node[crt]  (certificates) {\Large Additional Coursework};
 \draw[black!50, dotted, ultra thick] (certificates.south west) -- (certificates.south east);
@@ -183,15 +189,14 @@ pdfproducer={pdflatex, resumepy}
 \tikzstyle{c4}=[minimum height=1.6em, minimum width=3.6in, text width=3.6in, align=right, anchor=north west]
 \tikzstyle{c5}=[minimum height=1em, minimum width=7.2in, text width=7.2in, anchor=north west]
 %{ for school in additional_education %}
-\begin{tikzpicture}[font=\normalsize, node distance=0em, inner sep=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \node[c1] at (0in, 0em) { %{{school.description%}} };
 \node[c2] at (0in, -1.6em) { %{{school.course%}} };
 \node[c3] at (3.6in, 0em) { %{{school.completed%}} };
 \node[c4] at (3.6in, -1.6em) { %{{school.schoolname%}} };
 %{- if school.notes %}
 \node[c5] at (0in, -3.2em) {
-  \begin{itemize}[itemsep=0pt, partopsep=0pt, topsep=0pt, label=\textrm{--},
-                  leftmargin=*]
+  \begin{itemize}
     %{- for note in school.notes %}
     \item  %{{ note %}} 
     %{- endfor %}
@@ -205,13 +210,13 @@ pdfproducer={pdflatex, resumepy}
 
 %{ block references %}
 \vskip0.5em
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{ref}=[minimum height=2em, minimum width=3in, text width=3in, font=\bf, align=left, text=black!50]
 \node[ref] (references) {\Large References};
 \draw[black!50, dotted, ultra thick] (references.south west) -- (references.south east);
 \end{tikzpicture}
 
-\begin{tikzpicture}[font=\normalsize, node distance=0em, outer sep=0em]
+\begin{tikzpicture}[default picture]
 \tikzstyle{ref2}=[minimum height=1em, minimum width=7.2in, text width=7.2in, align=left]
 \node[ref2] (references2) [below=of references] {Available upon request. };
 \end{tikzpicture}
