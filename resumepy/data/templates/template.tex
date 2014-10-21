@@ -34,27 +34,27 @@
         font=\bf, text=black!50
     },
     section sub header/.style={%
-        minimum height=1.6em, minimum width=7.2in, text width=7.2in, font=\bf,
+        minimum height=1.3em, minimum width=7.2in, text width=7.2in, font=\bf,
         align=left, anchor=north west
     },
     section sub list/.style={%
-        minimum height=1.6em, minimum width=7.2in, text width=7.2in,
+        minimum height=1.3em, minimum width=7.2in, text width=7.2in,
         anchor=north west
     },
     section sub header left/.style={%
-        minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf,
+        minimum height=1.3em, minimum width=3.6in, text width=3.6in, font=\bf,
         align=left, anchor=north west
     },
     section sub sub header left/.style={%
-        minimum height=1.6em, minimum width=4.6in, text width=4.6in,
+        minimum height=1.3em, minimum width=4.6in, text width=4.6in,
         align=left, anchor=north west
     },
     section sub header right/.style={%
-        minimum height=1.6em, minimum width=3.6in, text width=3.6in, font=\bf,
+        minimum height=1.3em, minimum width=3.6in, text width=3.6in, font=\bf,
         align=right, anchor=north west
     },
     section sub sub header right/.style={%
-        minimum height=1.6em, minimum width=2.6in, text width=2.6in,
+        minimum height=1.3em, minimum width=2.6in, text width=2.6in,
         align=right, anchor=north west
     }
 }
@@ -104,7 +104,7 @@ pdfproducer={pdflatex, resumepy}
 %{ block contact %}
 \begin{tikzpicture}[default picture]
 \node[header]     at (0in, 0.0em)    {\Huge %{{contact.name-%}} };
-\node[sub header] at (0in, -3.2em)   {\Large %{{contact.city%}}, %{{contact.state%}} -- %{{contact.email %}} -- %{{ contact.phone %}} };
+\node[sub header] at (0in, -2.6em)   {\Large %{{contact.city%}}, %{{contact.state%}} -- %{{contact.email %}} -- %{{ contact.phone %}} };
 \draw[default line] (0in, -5em) -- (7.2in, -5em);
 \end{tikzpicture}
 %{- endblock contact %}
@@ -125,11 +125,11 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 
 %{ for skill in skills %}
-\vskip0.5em
+\vskip0.25em
 \begin{tikzpicture}[default picture]
 \node[section sub header] at (0in, 0em) { %{{ skill.name %}} };
 %{- if skill.description %}
-\node[section sub list] at (0in, -1.6em) {
+\node[section sub list] at (0in, -1.3em) {
   \begin{itemize}
     %{- for item in skill.description  %}
     \item  %{{ item %}} 
@@ -150,18 +150,18 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 
 %{ for job in work %}
-\vskip0.1em
+\vskip0.25em
 \begin{tikzpicture}[default picture]
 \node[section sub header left] at (0em, 0em)      { %{{-job.position-%}} };
 %{- if job.extra %}
-\node[section sub sub header left] at (0em,-1.6em)    { %{{-job.organization%}} -- %{{job.extra-%}} };
+\node[section sub sub header left] at (0em,-1.3em)    { %{{-job.organization%}} -- %{{job.extra-%}} };
 %{- else %}
-\node[section sub sub header left] at (0em,-1.6em)    { %{{-job.organization-%}} };
+\node[section sub sub header left] at (0em,-1.3em)    { %{{-job.organization-%}} };
 %{- endif %}
 \node[section sub header right] at (3.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
-\node[section sub sub header right] at (4.6in, -1.6em) { %{{-job.location-%}} };
+\node[section sub sub header right] at (4.6in, -1.3em) { %{{-job.location-%}} };
 %{- if job.notes %}
-\node[section sub list] at (0in, -3.2em) { 
+\node[section sub list] at (0in, -2.6em) { 
 \begin{itemize}
 %{- for note in job.notes %}
     \item %{{ note %}}
@@ -180,14 +180,15 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 
 %{ for school in education %}
+\vskip0.25em
 \begin{tikzpicture}[default picture]
 \node[section sub header left] at (0in, 0em) { %{{school.degree%}} };
-\node[section sub sub header left] at (0in, -1.6em) { %{{school.focus%}} };
+\node[section sub sub header left] at (0in, -1.3em) { %{{school.focus%}} };
 \node[section sub header right] at (3.6in, 0em) { %{{school.graduation%}} };
-\node[section sub sub header right] at (4.6in, -1.6em) { %{{school.schoolname%}} };
+\node[section sub sub header right] at (4.6in, -1.3em) { %{{school.schoolname%}} };
 
 %{- if school.notes %}
-\node[section sub list] at (0in, -3.2em) { 
+\node[section sub list] at (0in, -2.6em) { 
   \begin{itemize}
 %{- for note in school.notes %}
     \item %{{ note%}} 
@@ -207,13 +208,14 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 
 %{ for school in additional_education %}
+\vskip0.25em
 \begin{tikzpicture}[default picture]
 \node[section sub header left] at (0in, 0em) { %{{school.description%}} };
-\node[section sub sub header left] at (0in, -1.6em) { %{{school.course%}} };
+\node[section sub sub header left] at (0in, -1.3em) { %{{school.course%}} };
 \node[section sub header right] at (3.6in, 0em) { %{{school.completed%}} };
-\node[section sub sub header right] at (4.6in, -1.6em) { %{{school.schoolname%}} };
+\node[section sub sub header right] at (4.6in, -1.3em) { %{{school.schoolname%}} };
 %{- if school.notes %}
-\node[section sub list] at (0in, -3.2em) {
+\node[section sub list] at (0in, -2.6em) {
   \begin{itemize}
     %{- for note in school.notes %}
     \item  %{{ note %}} 
@@ -225,6 +227,34 @@ pdfproducer={pdflatex, resumepy}
 %{- endif %}
 %{- endblock additional_education %}
 
+%{ block projects %}
+%{- if projects %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[section header]  (projects) {\Large Projects};
+\draw[default line] (certificates.south west) -- (certificates.south east);
+\end{tikzpicture}
+
+%{ for project in projects %}
+\vskip0.25em
+\begin{tikzpicture}[default picture]
+\node[section sub header left] at (0in, 0em) { %{{project.title%}} };
+\node[section sub sub header left] at (0in, -1.3em) { {\tt %{{project.url%}} } };
+\node[section sub header right] at (3.6in, 0em) { %{{project.date%}} };
+\node[section sub sub header right] at (4.6in, -1.3em) { };
+%{- if project.notes %}
+\node[section sub list] at (0in, -2.6em) {
+  \begin{itemize}
+    %{- for note in project.notes %}
+    \item  %{{ note %}} 
+    %{- endfor %}
+  \end{itemize}\par};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endif %}
+%{- endblock projects %}
+
 %{- block references %}
 \vskip0.5em
 \begin{tikzpicture}[default picture]
@@ -233,7 +263,7 @@ pdfproducer={pdflatex, resumepy}
 \end{tikzpicture}
 
 \begin{tikzpicture}[default picture]
-\node[full width text] (references2) [below=of references] {Available upon request. };
+\node[full width text]  {Available upon request.};
 \end{tikzpicture}
 %{- endblock references %}
 
