@@ -36,7 +36,6 @@ resumepy_path = os.path.abspath(os.path.dirname(__file__))
 def create_parser():
     """Create argparse parser and define project paths."""
 
-
     parser = argparse.ArgumentParser(description='Create resume from '
                                      'yaml file.')
     parser.add_argument('-f', dest='file', help='input yaml file',
@@ -46,21 +45,13 @@ def create_parser():
                         type=str, required=True)
     parser.add_argument('-t', dest='template', help='local template',
                         type=check_file, required=False, default=None)
-    parser.add_argument('--no_address', help='do not include mailing address',
-                        dest='no_address', action='store_true', default=False,
-                        required=False)
-    parser.add_argument('--no_phone', help='do not include phone number',
-                        dest='no_phone', action='store_true', default=False,
-                        required=False)
-    parser.add_argument('--no_email', help='do not include email',
-                        dest='no_email', action='store_true', default=False,
-                        required=False)
 
     return parser
 
 
 def process_html(resume, templates_path):
     """Process the html version of the resume."""
+
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template('template.html')
 
@@ -142,10 +133,6 @@ def main():
 
     with open(args.file) as f:
         resume = yaml.load(f)
-
-    resume['no_address'] = args.no_address
-    resume['no_phone'] = args.no_phone
-    resume['no_email'] = args.no_email
 
     templates_path = os.path.join(resumepy_path, 'data', 'templates')
     if args.template:
