@@ -25,7 +25,6 @@ import subprocess
 import yaml
 import jinja2
 
-from .utils import check_dir
 from .utils import check_file
 from .utils import copy_file
 from .utils import mkdirs

@@ -28,6 +28,7 @@ from .exceptions import FileError
 
 resumepy_path = os.path.abspath(os.path.dirname(__file__))
 
+
 def check_dir(path):
     """Check that directory exists for argparse."""
     if os.path.exists(path):
