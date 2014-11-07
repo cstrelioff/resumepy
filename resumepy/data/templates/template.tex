@@ -75,15 +75,7 @@
 \pagestyle{fancy} 
 \fancyhead{}
 \fancyfoot{}
-%{- if (not no_email) and (not no_phone) %}
-\fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.email%}} - %{{contact.phone-%}} } }
-%{- elif (no_email) and (not no_phone) %}
-\fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.phone-%}} } }
-%{- elif (not no_email) and (no_phone) %}
 \fancyfoot[C]{\textbf{ %{{-contact.name%}} - %{{contact.email%}} } }
-%{- elif (no_email) and (no_phone) %}
-\fancyfoot[C]{\textbf{ %{{-contact.name%}} } }
-%{- endif %}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -104,7 +96,7 @@ pdfproducer={pdflatex, resumepy}
 %{ block contact %}
 \begin{tikzpicture}[default picture]
 \node[header]     at (0in, 0.0em)    {\Huge %{{contact.name-%}} };
-\node[sub header] at (0in, -2.6em)   {\Large %{{contact.city%}}, %{{contact.state%}} -- %{{contact.email %}} -- %{{ contact.phone %}} };
+\node[sub header] at (0in, -3em)   {\Large %{{contact.city%}}, %{{contact.state%}} -- %{{contact.email %}} };
 \draw[default line] (0in, -5em) -- (7.2in, -5em);
 \end{tikzpicture}
 %{- endblock contact %}
