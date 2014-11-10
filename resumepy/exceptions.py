@@ -36,6 +36,7 @@ class FileError(resumepyException):
     """Exception raised for error finding file."""
     pass
 
+
 class LaTeXError(resumepyException):
     """Exception raised when running LaTeX."""
     pass
