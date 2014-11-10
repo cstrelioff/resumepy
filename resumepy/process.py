@@ -25,6 +25,8 @@ import subprocess
 import yaml
 import jinja2
 
+from .exceptions import LaTeXError
+
 from .utils import check_file
 from .utils import copy_file
 from .utils import mkdirs
@@ -100,8 +102,9 @@ def process_pdf(resume, templates_path, template_filename):
         subprocess.check_call(command)
         os.chdir(cwd)
     except:
-        raise Exception("-- resumepy: pdflatex failed."
-                        "   Do you have Tex Live 2013 or 2014 availble?")
+        raise LaTeXError("-- resumepy: pdflatex failed."
+                         "  * Do you have Tex Live 2013 or 2014 availble?"
+                         "  * Or, do you have special chars in your yaml file?")
 
     print("-- resumepy: output in {}\n".format(
           os.path.join(cwd, "build", "pdf")))
