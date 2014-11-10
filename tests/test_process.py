@@ -24,8 +24,8 @@ from resumepy import process_text
 from resumepy import resumepy_path
 
 
-class ResumepyProcessHtmlTest(unittest.TestCase):
-    """Test the resumepy function process_html."""
+class ResumepyProcessTest(unittest.TestCase):
+    """Test the elements of process.py"""
 
     def setUp(self):
         self.tempdir = tempfile.mkdtemp()
