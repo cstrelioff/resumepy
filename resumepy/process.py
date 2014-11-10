@@ -102,9 +102,9 @@ def process_pdf(resume, templates_path, template_filename):
         subprocess.check_call(command)
         os.chdir(cwd)
     except:
-        msg = ("-- resumepy: pdflatex failed."
-               "  * Do you have Tex Live 2013 or 2014 availble?"
-               "  * Or, do you have special chars in your yaml file?")
+        msg = ("\n-- resumepy: pdflatex failed.\n"
+               "  * Do you have Tex Live 2013 or 2014 availble?\n"
+               "  * Maybe you have special chars (&, $,..) in your yaml file?")
 
         raise LaTeXError(msg)
 
