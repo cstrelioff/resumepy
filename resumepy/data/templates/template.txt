@@ -1,11 +1,23 @@
-{{contact.name}}
-{{contact.address}}
-{{contact.city}}, {{contact.state}} {{contact.zip}}
-{{contact.phone}}
-{{contact.email}}
+{% block contact -%}
+{{-contact.name}}
+{{contact.city-}}, {{contact.state}}
+{{contact.email-}}
+{%- endblock contact %}
 
-Experience
-{% for job in work %}
-{{job.organization}}
-{{job.start}} - {{job.stop}}
+## Summary ##
+
+{% block summary -%}
+{{-summary | wordwrap-}}
+{%- endblock summary %}
+
+{% block skills %}
+## Core Skills ##
+{% for skill in skills %}
+* {{ skill.name }}
+{% if skill.description %}
+{%- for item in skill.description %}
+- {{ item | wordwrap }} 
+{%- endfor %}
+{%- endif %}
 {% endfor %}
+{%- endblock skills %}
