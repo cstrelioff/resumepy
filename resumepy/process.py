@@ -112,10 +112,10 @@ def process_pdf(resume, templates_path, template_filename):
           os.path.join(cwd, "build", "pdf")))
 
 
-def process_text(resume, templates_path):
+def process_text(resume, templates_path, template_filename):
     """Process the text verion of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
-    template = env.get_template('template.txt')
+    template = env.get_template(template_filename)
 
     print("-- resumepy: creating text file...")
 
@@ -150,7 +150,7 @@ def main():
         templates = templates_path
 
     if args.output == 'txt':
-        process_text(resume, templates)
+        process_text(resume, templates, template_file)
     elif args.output == 'html':
         process_html(resume, templates)
     elif args.output == 'pdf':
