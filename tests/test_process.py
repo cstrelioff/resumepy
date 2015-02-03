@@ -39,6 +39,9 @@ class ResumepyProcessTest(unittest.TestCase):
   email: jane@example.com
   phone: 555.555.5555
   jobtitle: Astronaut
+website:
+  label: mysite
+  link: 'http://mysite.com'
 objective:
   Reclaim Mars from invaders.
 work:

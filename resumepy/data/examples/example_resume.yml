@@ -8,15 +8,19 @@ contact:
   email: jane-joe@expert.com
   phone: 999.999.9999
   jobtitle: Expert
-online:
-  - site: website, fake
-    link: expert.com
-  - site: blog, fake
-    link: expert.com/blog
-  - site: github, fake
-    link: github.com/janejoeexpert
-  - site: linkedin, fake
-    link: www.linkedin.com/in/janejoeexpert
+
+website:
+  label: website, fake
+  link: expert.com
+blog:
+  label: blog, fake
+  link: expert.com/blog
+github:
+  label: github, fake
+  link: github.com/janejoeexpert
+linkedin:
+  label: linkedin, fake
+  link: www.linkedin.com/in/janejoeexpert
 summary: As an expert in Machine Talking, I am looking for new challenges focused on making computers babble better.
 education:
   - schoolname: School A
