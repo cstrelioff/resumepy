@@ -5,12 +5,14 @@
 \documentclass[12pt]{article}
 %{- endif %}
 
-%% FONT setup
+% colors
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% FONT setup
 \usepackage{lmodern}
 \renewcommand\familydefault{\sfdefault}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-
 
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -21,15 +23,15 @@
     },
     header/.style={%
         minimum height=3.2em, minimum width=4.7in, text width=4.7in,
-        align=left, text=black!100, anchor=north west,
+        align=left, text=black!100, anchor=north west
     },
     header right/.style={%
         minimum height=1.6em, minimum width=2.5in, text width=2.5in,
-        align=right, text=black!100, anchor=north east,
+        align=right, text=black!100, anchor=north east
     },
     sub header/.style={%
         minimum height=1.6em, minimum width=7.2in, text width=7.2in,
-        align=left, text=black!50, anchor=north west,
+        align=left, text=black!100, anchor=north west
     },
     default line/.style={%
         black!100, solid, thick
@@ -95,7 +97,10 @@ pdftitle={ Resume :: %{{contact.name %}} },
 pdfauthor={ %{{contact.name %}} },
 pdfsubject={Resume for %{{ contact.name %}}},
 pdfcreator={pdflatex, resumepy},
-pdfproducer={pdflatex, resumepy}
+pdfproducer={pdflatex, resumepy},
+colorlinks=true,
+linkcolor=Mahogany,
+urlcolor=Mahogany
 }
 %{- endblock documentheader %}
 
@@ -104,9 +109,10 @@ pdfproducer={pdflatex, resumepy}
 %{ block contact %}
 \begin{tikzpicture}[default picture]
 \node[header]       at (0in, 0.0em)    {\Huge %{{contact.name-%}} };
-\node[header right] at (7.2in, -0.8em) {\large  %{{contact.email %}} };
-\node[header right] at (7.2in, -2.4em) {\large  %{{online.website %}} };
-\node[sub header]   at (0in, -3.2em)   {\Large %{{contact.jobtitle%}} >> %{{contact.city%}}, %{{contact.state%}}};
+\node[header right] at (7.2in, 0em)    {\large \href{mailto:%{{-contact.email-%}} }{ %{{-contact.email-%}} } };
+\node[header right] at (7.2in, -1.6em) {\large \href{ %{{-website.link-%}} }{ %{{-website.label-%}} } };
+\node[header right] at (7.2in, -3.2em) { %{{contact.phone%}} };
+\node[sub header]   at (0in, -3.2em)   {\Large %{{contact.jobtitle%}} :: %{{contact.city%}}, %{{contact.state%}}};
 %\draw[default line] (0in, -5.2em) -- (7.2in, -5.2em);
 \end{tikzpicture}
 %{- endblock contact %}
