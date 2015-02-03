@@ -55,12 +55,20 @@
         minimum height=1.3em, minimum width=3.6in, text width=3.6in,
         align=left, anchor=north west
     },
+    section sub header left long/.style={%
+        minimum height=1.3em, minimum width=5.6in, text width=5.6in,
+        align=left, anchor=north west
+    },
     section sub sub header left/.style={%
         minimum height=1.3em, minimum width=4.6in, text width=4.6in,
         align=left, anchor=north west
     },
     section sub header right/.style={%
         minimum height=1.3em, minimum width=3.6in, text width=3.6in,
+        align=right, anchor=north west
+    },
+    section sub header right short/.style={%
+        minimum height=1.3em, minimum width=1.6in, text width=1.6in,
         align=right, anchor=north west
     },
     section sub sub header right/.style={%
@@ -71,7 +79,7 @@
 
 \usepackage{enumitem}
 % set style for lists
-\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=$\bullet$, leftmargin=*}
+\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=$-$, leftmargin=*}
 
 \usepackage{calc}
 \usepackage[paper=letterpaper, includefoot,
@@ -130,22 +138,20 @@ urlcolor=Mahogany
 %{- endblock profile %}
 
 %{ block education %}
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[default picture]
 \node[section header]  (education) {\Large Education};
 %\draw[default line] (education.south west) -- (education.south east);
 \end{tikzpicture}
 
 %{ for school in education %}
-\vskip0.25em
+\vskip0.5em
 \begin{tikzpicture}[default picture]
-\node[section sub header left] at (0in, 0em) { %{{school.degree%}} };
-\node[section sub sub header left] at (0in, -1.3em) { %{{school.focus%}} };
-\node[section sub header right] at (3.6in, 0em) { %{{school.graduation%}} };
-\node[section sub sub header right] at (4.6in, -1.3em) { %{{school.schoolname%}} };
+\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-school.degree%}}, %{{school.focus-%}} }  --  \href{ %{{-school.web-%}} }{ %{{-school.schoolname-%}} } };
+\node[section sub header right short] at (5.6in, 0em) {  %{{school.graduation-%}} };
 
 %{- if school.notes %}
-\node[section sub list] at (0in, -2.6em) { 
+\node[section sub list] at (0in, -1.3em) { 
   \begin{itemize}
 %{- for note in school.notes %}
     \item %{{ note%}} 
@@ -158,24 +164,16 @@ urlcolor=Mahogany
 
 %{ block skills %}
 %{- if skills %}
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[default picture]
 \node[section header] (skills) at (0em, 0em) {\Large Core Skills};
-\draw[default line] (skills.south west) -- (skills.south east);
+%\draw[default line] (skills.south west) -- (skills.south east);
 \end{tikzpicture}
 
 %{ for skill in skills %}
-\vskip0.25em
+\vskip0.5em
 \begin{tikzpicture}[default picture]
-\node[section sub header] at (0in, 0em) { %{{ skill.name %}} };
-%{- if skill.description %}
-\node[section sub list] at (0in, -1.3em) {
-  \begin{itemize}
-    %{- for item in skill.description  %}
-    \item  %{{ item %}} 
-    %{- endfor %}
-  \end{itemize}\par};
-%{- endif %}
+\node[full width text] at (0in, 0em) { \textbf{ %{{-skill.name-%}} }  --  %{{skill.description %}} };
 \end{tikzpicture}
 %{ endfor %}
 %{ endif %}
