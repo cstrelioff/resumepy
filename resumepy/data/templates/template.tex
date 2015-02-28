@@ -107,8 +107,10 @@ pdfsubject={Resume for %{{ contact.name %}}},
 pdfcreator={pdflatex, resumepy},
 pdfproducer={pdflatex, resumepy},
 colorlinks=true,
-linkcolor=Mahogany,
-urlcolor=Mahogany
+linkcolor=Black,
+urlcolor=Black
+%linkcolor=Mahogany,
+%urlcolor=Mahogany
 }
 %{- endblock documentheader %}
 
@@ -162,6 +164,31 @@ urlcolor=Mahogany
 %{ endfor %}
 %{- endblock education %}
 
+%{ block additional_education %}
+%{- if additional_education %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header]  (certificates) {\Large Additional Coursework};
+\end{tikzpicture}
+
+%{ for school in additional_education %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-school.course-%}} } -- %{{school.schoolname%}}};
+\node[section sub header right short] at (5.6in, 0em) { %{{school.completed%}} };
+%{- if school.notes %}
+\node[section sub list] at (0in, -1.3em) {
+  \begin{itemize}
+    %{- for note in school.notes %}
+    \item  %{{ note %}} 
+    %{- endfor %}
+  \end{itemize}\par};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endif %}
+%{- endblock additional_education %}
+
 %{ block skills %}
 %{- if skills %}
 \vskip1em
@@ -181,25 +208,19 @@ urlcolor=Mahogany
 %{ endblock skills %}
 
 %{ block  work %}
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[default picture]
-\node[section header] (experience) {\Large Selected Work Experience};
-\draw[default line] (experience.south west) -- (experience.south east);
+\node[section header] (experience) at (0em, 0em) {\Large Work Experience};
+%\draw[default line] (experience.south west) -- (experience.south east);
 \end{tikzpicture}
 
 %{ for job in work %}
-\vskip0.25em
+\vskip0.5em
 \begin{tikzpicture}[default picture]
-\node[section sub header left] at (0em, 0em)      { %{{-job.position-%}} };
-%{- if job.extra %}
-\node[section sub sub header left] at (0em,-1.3em)    { %{{-job.organization%}} -- %{{job.extra-%}} };
-%{- else %}
-\node[section sub sub header left] at (0em,-1.3em)    { %{{-job.organization-%}} };
-%{- endif %}
-\node[section sub header right] at (3.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
-\node[section sub sub header right] at (4.6in, -1.3em) { %{{-job.location-%}} };
+\node[section sub header left long] at (0em, 0em) { \textbf{ %{{-job.position-%}} } -- \href{ %{{-job.web-%}} }{ %{{-job.organization-%}} } };
+\node[section sub header right short] at (5.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
 %{- if job.notes %}
-\node[section sub list] at (0in, -2.6em) { 
+\node[section sub list] at (0in, -1.3em) { 
 \begin{itemize}
 %{- for note in job.notes %}
     \item %{{ note %}}
@@ -211,51 +232,20 @@ urlcolor=Mahogany
 %{- endblock work %}
 
 
-%{ block additional_education %}
-%{- if additional_education %}
-\vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[section header]  (certificates) {\Large Additional Coursework};
-\draw[default line] (certificates.south west) -- (certificates.south east);
-\end{tikzpicture}
-
-%{ for school in additional_education %}
-\vskip0.25em
-\begin{tikzpicture}[default picture]
-\node[section sub header left] at (0in, 0em) { %{{school.description%}} };
-\node[section sub sub header left] at (0in, -1.3em) { %{{school.course%}} };
-\node[section sub header right] at (3.6in, 0em) { %{{school.completed%}} };
-\node[section sub sub header right] at (4.6in, -1.3em) { %{{school.schoolname%}} };
-%{- if school.notes %}
-\node[section sub list] at (0in, -2.6em) {
-  \begin{itemize}
-    %{- for note in school.notes %}
-    \item  %{{ note %}} 
-    %{- endfor %}
-  \end{itemize}\par};
-%{- endif %}
-\end{tikzpicture}
-%{ endfor %}
-%{- endif %}
-%{- endblock additional_education %}
-
 %{ block projects %}
 %{- if projects %}
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[default picture]
 \node[section header]  (projects) {\Large Projects};
-\draw[default line] (certificates.south west) -- (certificates.south east);
 \end{tikzpicture}
 
 %{ for project in projects %}
-\vskip0.25em
+\vskip0.5em
 \begin{tikzpicture}[default picture]
-\node[section sub header left] at (0in, 0em) { %{{project.title%}} };
-\node[section sub sub header left] at (0in, -1.3em) { {\tt %{{project.url%}} } };
-\node[section sub header right] at (3.6in, 0em) { %{{project.date%}} };
-\node[section sub sub header right] at (4.6in, -1.3em) { };
+\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-project.title-%}} } -- \href{ %{{-project.web-%}} }{ %{{-project.web-%}} }  };
+\node[section sub header right short] at (5.6in, 0em) { %{{project.date%}} };
 %{- if project.notes %}
-\node[section sub list] at (0in, -2.6em) {
+\node[section sub list] at (0in, -1.3em) {
   \begin{itemize}
     %{- for note in project.notes %}
     \item  %{{ note %}} 
@@ -268,12 +258,12 @@ urlcolor=Mahogany
 %{- endblock projects %}
 
 %{- block references %}
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[default picture]
 \node[section header] (references) {\Large References};
-\draw[default line] (references.south west) -- (references.south east);
 \end{tikzpicture}
 
+\vskip0.5em
 \begin{tikzpicture}[default picture]
 \node[full width text]  {Available upon request.};
 \end{tikzpicture}
