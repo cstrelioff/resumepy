@@ -127,6 +127,7 @@ urlcolor=Black
 \end{tikzpicture}
 %{- endblock contact %}
 
+
 %{ block profile %}
 \vskip1em
 \begin{tikzpicture}[default picture]
@@ -138,6 +139,7 @@ urlcolor=Black
 \node[full width text] {  %{{-summary-%}} };
 \end{tikzpicture}
 %{- endblock profile %}
+
 
 %{ block education %}
 \vskip1em
@@ -164,6 +166,7 @@ urlcolor=Black
 %{ endfor %}
 %{- endblock education %}
 
+
 %{ block additional_education %}
 %{- if additional_education %}
 \vskip1em
@@ -189,23 +192,6 @@ urlcolor=Black
 %{- endif %}
 %{- endblock additional_education %}
 
-%{ block skills %}
-%{- if skills %}
-\vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header] (skills) at (0em, 0em) {\Large Core Skills};
-%\draw[default line] (skills.south west) -- (skills.south east);
-\end{tikzpicture}
-
-%{ for skill in skills %}
-\vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[full width text] at (0in, 0em) { \textbf{ %{{-skill.name-%}} }  --  %{{skill.description %}} };
-\end{tikzpicture}
-%{ endfor %}
-%{ endif %}
-
-%{ endblock skills %}
 
 %{ block  work %}
 \vskip1em
@@ -256,6 +242,26 @@ urlcolor=Black
 %{ endfor %}
 %{- endif %}
 %{- endblock projects %}
+
+
+%{ block skills %}
+%{- if skills %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header] (skills) at (0em, 0em) {\Large Core Skills};
+%\draw[default line] (skills.south west) -- (skills.south east);
+\end{tikzpicture}
+
+%{ for skill in skills %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[full width text] at (0in, 0em) { \textbf{ %{{-skill.name-%}} }  --  %{{skill.description %}} };
+\end{tikzpicture}
+%{ endfor %}
+%{ endif %}
+
+%{ endblock skills %}
+
 
 %{- block references %}
 \vskip1em
