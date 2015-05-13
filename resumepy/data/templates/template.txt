@@ -1,23 +1,61 @@
 {% block contact -%}
-{{-contact.name}}
-{{contact.city-}}, {{contact.state}}
-{{contact.email-}}
+{{contact.name}}
+
+{{contact.email}}
+{{website.link}} 
+{{contact.phone}}
+
+{{contact.jobtitle}} :: {{contact.city}}, {{contact.state}}
 {%- endblock contact %}
 
-## Summary ##
+{% block profile -%}
+## Profile ##
 
-{% block summary -%}
-{{-summary | wordwrap-}}
-{%- endblock summary %}
+{{ summary | wordwrap -}}
+{%- endblock profile %}
 
-{% block skills %}
-## Core Skills ##
-{% for skill in skills %}
-* {{ skill.name }}
-{% if skill.description %}
-{%- for item in skill.description %}
-- {{ item | wordwrap }} 
-{%- endfor %}
-{%- endif %}
-{% endfor %}
-{%- endblock skills %}
+{% block education -%}
+## Education ##
+
+{% for school in education -%}
+# {{ school.degree }} {{ school.focus }}, {{school.graduation }}
+{{ school.schoolname }}
+{{ school.web }}
+
+{%- if school.notes %}
+{% for note in school.notes -%}
+- {{ note | wordwrap }} 
+{% endfor -%}
+{% endif %}
+{% endfor -%}
+{% endblock education -%}
+
+{% block additional_education %}
+## Additional Coursework ##
+
+{% for school in additional_education -%}
+# {{ school.course }}, {{ school.completed }} 
+{{ school.schoolname }}
+{%- if school.notes %}
+{% for note in school.notes -%}
+- {{ note | wordwrap }} 
+{% endfor -%}
+{% endif %}
+{% endfor -%}
+{% endblock additional_education -%}
+
+{% block  work -%}
+## Work Experience ##
+
+{% for job in work -%}
+# {{ job.position }}, {{ job.start }} --  {{job.stop }}
+{{ job.organization }}
+{{ job.web }}
+{%- if job.notes %}
+{% for note in job.notes -%}
+- {{ note | wordwrap }}
+{% endfor -%}
+{% endif %}
+{% endfor -%}
+{% endblock work -%}
+
