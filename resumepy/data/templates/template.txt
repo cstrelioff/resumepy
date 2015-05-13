@@ -59,3 +59,32 @@
 {% endfor -%}
 {% endblock work -%}
 
+{% block projects -%}
+## Projects ##
+
+{% for project in projects -%}
+# {{ project.title }}, {{project.date }}
+{{project.web }}
+{%- if project.notes %}
+{% for note in project.notes -%}
+- {{ note | wordwrap }} 
+{% endfor -%}
+{% endif %}
+{% endfor -%}
+{% endblock projects -%}
+
+{% block skills -%}
+## Core SKills ##
+
+{% for skill in skills -%}
+# {{ skill.name }}
+{{ skill.description | wordwrap }}
+
+{% endfor -%}
+{% endblock skills -%}
+
+{% block references -%}
+## References ##
+
+Available upon request.
+{% endblock references -%}
