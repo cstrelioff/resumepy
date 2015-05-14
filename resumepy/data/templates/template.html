@@ -1,160 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
+    <title>Rr&eacute;sum&eacute;:: {{contact.name}}</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Resume for {{contact.name}}">
-    <meta name="author" content="{{contact.name}}">
-
-    <title>{{contact.name}} :: Resume</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom styles for this template -->
-    <link href="css/custom.css" rel="stylesheet"> 
-
-    <!-- add font-awesoeme -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-
+  
+    <!-- styles: should have reset.css first -->
+    <link rel="stylesheet" href= "css/reset.css">
+    <link rel="stylesheet" href= "css/main.css">
+  
   </head>
-
   <body>
-    <div class="container">
 
-      <!-- header with address -->
-      <div class="header">
-        <h1>{{contact.name}}</h1>
-        
-        <div class="row">
-          <div class="col-xs-12 col-sm-6">
-            <address>
-              {{contact.address}}<br>
-              {{contact.city}}, {{contact.state}} {{contact.zip}}<br>
-              {{contact.phone}}<br>
-              {{contact.email}}
-            </address>
-          </div>
-          <div class="col-xs-12 col-sm-6">
-          <p>
-          {%- for website in online %}
-            <a href="http://{{website.link}}" target="_blank_">
-             {% if website.site == 'website' %}
-               <i class="fa fa-home fa-fw"></i> {{website.site}}</a><br>
-             {% elif website.site == 'blog' %}
-               <i class="fa fa-pencil fa-fw"></i> {{website.site}}</a><br>
-             {% elif website.site == 'linkedin' %}
-               <i class="fa fa-linkedin-square fa-fw"></i> {{website.site}}</a><br>
-             {% elif website.site == 'github' %}
-               <i class="fa fa-github fa-fw"></i> {{website.site}}</a><br>
-             {% else %}
-                {{website.site}}</a><br>
-             {% endif %}
-          {% endfor -%}
-          </p>
-          </div>
-        </div>
-      </div>
+  <div id="fullpage">
 
-      {% if summary %}
-      <div id="summary">
-        <h2>Summary</h2>
-        <div class="row">
-            <div class="col-xs-12 col-sm-10">
-              <p class="text-left">
-              {{summary}}
-              </p>
-            </div>
-        </div>
-      </div>
-      {% endif %}
+    <section id="contact">
+      {% block contact %}
+      <article>
+        <h1>{{contact.name}}</h1> 
+        <h2>{{contact.jobtitle}}</h2>
+      </article>
+
+      <aside>
+        <h3>{{contact.city}}, {{contact.state}}</h3>
+        <h3>{{website.link}}</h3>
+      </aside>
+      {% endblock contact %}
+    </section>
+
+    <section id="profile">
+      <article>
+      <h2>Profile</h2>
+      </article>
+
+      {% block profile -%}
+      <article class="article_full">
+        <p>{{ summary | wordwrap }}</p>
+      </article>
+      {%- endblock profile %}
+    </section>
+
+    <section id="education">
+      <article>
+      <h2>Education</h2>
+      </article>
       
-      <div id="education">
-        <h2>Education</h2>
-        <hr>
-        {% for school in education %}
-          <div class="row">
-            <div class="col-xs-6 col-sm-2">
-              <p class="text-left">
-              <strong>{{school.degree}}</strong>, {{school.focus}}
-              </p>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <p class="text-left"><strong>{{school.schoolname}}</strong></p>
-            </div>
-            <div class="col-xs-6 col-sm-2">
-              <p class="text-left">
-              <strong>{{school.graduation}}</strong>
-              </p>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <p><ul>
-              {% for note in school.notes %}
-                <li>{{note}}</li>
-              {% endfor %}
-              </ul></p>
-            </div>
-          </div>
-        {% endfor %}
+      {% block education -%}
+      {% for school in education -%}
+      <article>
+        <strong>
+          <a href="{{- school.web -}} ">{{ school.degree }}, {{ school.focus }}</a>
+        </strong> <br /><br />
+        {{ school.schoolname }}
+      </article>
+      <aside>
+      {{school.graduation }}
+      </aside>
+      
+      {%- if school.notes %}
+      <article class="article_full">
+      <ul>
+      {% for note in school.notes -%}
+        <li> {{ note | wordwrap }} </li>
+      {% endfor -%}
+      </ul>
+      </article>
+      {% endif %}
+      {% endfor -%}
+      {% endblock education -%}
+    </section>
 
-        {% if educationother %}
-        <h3>Additional Education</h3>
-          <div class="row">
-          {% for school in educationother %} 
-            <div class="col-xs-6 col-sm-2">
-              <p class="text-left">
-              {{school.course}}
-              </p>
-            </div>
-          {% endfor %}
-          </div>
-          {% endif %}  
-      </div>
+    <section id="additional_coursework">
+      <article>
+      <h2>Additional Coursework</h2>
+      </article>
 
-      <div id="work">
-        <h2>Experience</h2>
-        <hr>
-        {% for job in work %}
-          <div class="row">
-            <div class="col-xs-6 col-sm-2">
-              <p class="text-left">
-              <strong>{{job.position}}</strong>
-              </p>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <p class="text-left"><strong>{{job.organization}}</strong></p>
-            </div>
-            <div class="col-xs-6 col-sm-2">
-              <p class="text-left">
-              <strong>{{job.start}} - {{job.stop}}</strong>
-              </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <p><ul>
-              {% for note in job.notes %}
-                <li>{{note}}</li>
-              {% endfor %}
-              </ul></p>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
+      {% block additional_education %}
+      {% for school in additional_education -%}
+      <article>
+        <strong>{{ school.course }}</strong> <br /><br />
+        {{ school.schoolname }} 
+      </article>
+      <aside>
+        {{ school.completed }}
+      </aside>
 
+      {%- if school.notes %}
+      <article class="article_full">
+      <ul>
+      {% for note in school.notes -%}
+        <li>{{ note | wordwrap }}</li>
+      {% endfor -%}
+      </ul>
+      </article>
+      {% endif %}
+      {% endfor -%}
+      {% endblock additional_education -%}
 
-    </div> <!-- /container -->
+    </section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <article id="article_1">
 
+    <p>
+    
+    {% block  work -%}
+    ## Work Experience ##
+    
+    {% for job in work -%}
+    # {{ job.position }}, {{ job.start }} --  {{job.stop }}
+    {{ job.organization }}
+    {{ job.web }}
+    {%- if job.notes %}
+    {% for note in job.notes -%}
+    - {{ note | wordwrap }}
+    {% endfor -%}
+    {% endif %}
+    {% endfor -%}
+    {% endblock work -%}
+    
+    {% block projects -%}
+    ## Projects ##
+    
+    {% for project in projects -%}
+    # {{ project.title }}, {{project.date }}
+    {{project.web }}
+    {%- if project.notes %}
+    {% for note in project.notes -%}
+    - {{ note | wordwrap }} 
+    {% endfor -%}
+    {% endif %}
+    {% endfor -%}
+    {% endblock projects -%}
+    
+    {% block skills -%}
+    ## Core SKills ##
+    
+    {% for skill in skills -%}
+    # {{ skill.name }}
+    {{ skill.description | wordwrap }}
+    
+    {% endfor -%}
+    {% endblock skills -%}
+    
+    {% block references -%}
+    ## References ##
+    
+    Available upon request.
+    {% endblock references -%}
+    </p>
+
+    </article>
+    
+    <aside role="complementary" id="aside_1">
+
+    </aside>
+
+    <footer role="contentinfo" id="footer"></footer>
+
+  </div> <!-- end fullpage -->
+
+  <!-- javascript links -->
+  
   </body>
+
 </html>
