@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rr&eacute;sum&eacute;:: {{contact.name}}</title>
+    <title>R&eacute;sum&eacute; -- {{contact.name}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <!-- styles: should have reset.css first -->
     <link rel="stylesheet" href= "css/reset.css">
     <link rel="stylesheet" href= "css/main.css">
   
@@ -14,21 +13,15 @@
 
   <div id="fullpage">
 
-    <section id="contact">
       {% block contact %}
       <article>
         <h1>{{contact.name}}</h1> 
-        <h2>{{contact.jobtitle}}</h2>
+        <h3>{{contact.city}}, {{contact.state}}</h3>
       </article>
 
-      <aside>
-        <h3>{{contact.city}}, {{contact.state}}</h3>
-        <h3>{{website.link}}</h3>
-      </aside>
+      <aside></aside>
       {% endblock contact %}
-    </section>
 
-    <section id="profile">
       <article>
       <h2>Profile</h2>
       </article>
@@ -38,9 +31,7 @@
         <p>{{ summary | wordwrap }}</p>
       </article>
       {%- endblock profile %}
-    </section>
 
-    <section id="education">
       <article>
       <h2>Education</h2>
       </article>
@@ -49,7 +40,7 @@
       {% for school in education -%}
       <article>
         <strong>
-          <a href="{{- school.web -}} ">{{ school.degree }}, {{ school.focus }}</a>
+          <a target="_blank" href="{{- school.web -}} ">{{ school.degree }}, {{ school.focus }}</a>
         </strong> <br /><br />
         {{ school.schoolname }}
       </article>
@@ -68,9 +59,7 @@
       {% endif %}
       {% endfor -%}
       {% endblock education -%}
-    </section>
 
-    <section id="additional_coursework">
       <article>
       <h2>Additional Coursework</h2>
       </article>
@@ -97,65 +86,86 @@
       {% endfor -%}
       {% endblock additional_education -%}
 
-    </section>
+      <article>
+      <h2>Work Experience</h2>
+      </article>
+    
+      {% block  work %}
+      {% for job in work -%}
+      <article>
+        <strong>{{ job.position }}</strong> <br /><br />
+        <a target="_blank" href="{{ job.web }}">{{ job.organization }}</a>
+      </article>
+      <aside>
+      {{ job.start }} --  {{job.stop }}
+      </aside>
 
-    <article id="article_1">
+      {%- if job.notes %}
+      <article class="article_full">
+      <ul>
+      {% for note in job.notes -%}
+        <li>{{ note | wordwrap }}</li>
+      {% endfor -%}
+      </ul>
+      </article>
+      {% endif %}
+      {% endfor -%}
+      {% endblock work -%}
+      
+      <article>
+      <h2>Projects</h2>
+      </article>
 
-    <p>
-    
-    {% block  work -%}
-    ## Work Experience ##
-    
-    {% for job in work -%}
-    # {{ job.position }}, {{ job.start }} --  {{job.stop }}
-    {{ job.organization }}
-    {{ job.web }}
-    {%- if job.notes %}
-    {% for note in job.notes -%}
-    - {{ note | wordwrap }}
-    {% endfor -%}
-    {% endif %}
-    {% endfor -%}
-    {% endblock work -%}
-    
-    {% block projects -%}
-    ## Projects ##
-    
-    {% for project in projects -%}
-    # {{ project.title }}, {{project.date }}
-    {{project.web }}
-    {%- if project.notes %}
-    {% for note in project.notes -%}
-    - {{ note | wordwrap }} 
-    {% endfor -%}
-    {% endif %}
-    {% endfor -%}
-    {% endblock projects -%}
-    
-    {% block skills -%}
-    ## Core SKills ##
-    
-    {% for skill in skills -%}
-    # {{ skill.name }}
-    {{ skill.description | wordwrap }}
-    
-    {% endfor -%}
-    {% endblock skills -%}
-    
-    {% block references -%}
-    ## References ##
-    
-    Available upon request.
-    {% endblock references -%}
-    </p>
+      {% block projects %}
+      {% for project in projects -%}
+      <article>
+        <strong>{{ project.title }}</strong> <br /><br />
+        <a target="_blank" href="{{project.web }}">{{project.web }}</a>
+      </article>
+      <aside>
+        {{project.date }}
+      </aside>
 
-    </article>
+      {%- if project.notes %}
+      <article class="article_full">
+      <ul>
+      {% for note in project.notes -%}
+        <li>{{ note | wordwrap }}</li>
+      {% endfor -%}
+      </ul>
+      </article>
+      {% endif %}
+      {% endfor -%}
+      {% endblock projects -%}
+      
+      <article>
+      <h2>Core Skills</h2>
+      </article>
+
+      {% block skills -%}
+      {% for skill in skills -%}
+      <article>
+        <strong>{{ skill.name }}</strong>
+      </article>
+
+      <article class="article_full">
+        <p>{{ skill.description | wordwrap }}</p>
+      </article>
+      {% endfor -%}
+      {% endblock skills -%}
+
+      {% block references -%}
+      <article>
+      <h2>References</h2>
+      </article>
     
-    <aside role="complementary" id="aside_1">
+      <article>    
+      Available upon request
+      </article>
+      {% endblock references -%}
 
-    </aside>
-
-    <footer role="contentinfo" id="footer"></footer>
+    <footer role="contentinfo" id="footer">
+    </footer>
 
   </div> <!-- end fullpage -->
 

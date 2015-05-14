@@ -4,16 +4,15 @@ header, article, aside, footer, ul, li, p {
     box-sizing: border-box;
 }
 
-#fullpage {max-width: 62em; margin: auto; background: #ddd;}
 
-html {font-family: Arial, Helvetica, sans-serif;}
+html {font-family: Arial, Helvetica, sans-serif; background: #ddd;}
 header, article, aside, footer {padding: 5px 1em; margin: 0 5% 2px;}
-section {padding-top: 10px;}
 h1 {font-size: 2em;}
 h2 {font-size: 1.5em;}
-h3 {font-size: 1.25em}
-h1{font-weight: 2; margin: 5px 0;}
-h2, h3{font-weight: 1;margin: 5px 0;}
+h3 {font-size: 1.25em;}
+article h2 {padding: 5px; border-bottom: solid #999;}
+h1{font-weight: 2; margin: 10px 0;}
+h2, h3{font-weight: 1; margin: 10px 0;}
 p {font-size: 1em; margin: 1px 0; line-height: 150%;}
 a {text-decoration: none; color:#000;}
 a:hover {color:#44f;}
@@ -21,12 +20,14 @@ ul {padding-left: 10px; margin: 5px 0; list-style-type: disc;}
 li {margin-left: 2px; padding-left: 2px;}
 strong {font-weight: bold;}
 
-.article_full {padding: 5px 1em; margin: 0 5% 2px;}
+#fullpage {max-width: 1000px; margin: auto; background: #fff;}
 #contact {padding-top: 10px;}
 
-@media only screen and (min-width: 38em) {
+.article_full {padding: 5px 1em; margin: 0 5% 2px;}
+
+@media only screen and (min-width: 650px) {
     article {width: 57%; float: left; margin-right: 0;}
     aside {width: 31%; float: right; margin-left: 0;}
     footer {clear: both;}
-    .article_full {width:88%;}
+    .article_full {width:90%;}
 }
