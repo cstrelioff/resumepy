@@ -25,7 +25,6 @@ class CommandLineTestCase(TestCase):
     Base TestCase class, sets up a CLI parser
     """
     def setUp(self):
-        """SetUp test."""
         self.parser = create_parser()
 
         self.tempdir = tempfile.mkdtemp()
@@ -37,27 +36,26 @@ class CommandLineTestCase(TestCase):
             f.write('testing')
 
     def tearDown(self):
-        """TearDown test."""
         shutil.rmtree(self.tempdir)
         os.chdir(self.cwd)
 
     def test_with_help_arg(self):
         """
-        User passes `-h`, should fail wih SystemExit.
+        commandline: test_with_help_arg()
         """
         with self.assertRaises(SystemExit):
             self.parser.parse_args('-h'.split())
 
     def test_yaml_input_does_not_exist(self):
         """
-        User passes `-f file2.yml -o pdf` but file2.yml does not exist.
+        commandline: test_yaml_input_does_not_exist()
         """
         with self.assertRaises(FileError):
             self.parser.parse_args('-f file2.yml -o pdf'.split())
 
     def test_pdf_output(self):
         """
-        User passes `-f file.yml -o pdf` and file.yml does exists.
+        commandline: test_pdf_output()
         """
         args = self.parser.parse_args('-f file.yml -o pdf'.split())
 
