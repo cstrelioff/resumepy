@@ -61,3 +61,12 @@ class CommandLineTestCase(TestCase):
 
         self.assertEqual(args.file, 'file.yml')
         self.assertEqual(args.output, 'pdf')
+
+    def test_txt_output(self):
+        """
+        commandline: test_txt_output()
+        """
+        args = self.parser.parse_args('-f file.yml -o txt'.split())
+
+        self.assertEqual(args.file, 'file.yml')
+        self.assertEqual(args.output, 'txt')
