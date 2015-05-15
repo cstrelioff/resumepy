@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  {% block header_style -%}
   <style>
   /* reset.css */
 
@@ -91,20 +92,19 @@
       .article_full {width:90%;}
   }
   </style>
-  
+  {%- endblock header_style %}
+
   </head>
   <body>
 
   <div id="fullpage">
 
-      {% block contact %}
+      {% block contact -%}
       <article>
         <h1>{{contact.name}}</h1> 
         <h3>{{contact.city}}, {{contact.state}}</h3>
       </article>
-
-      <aside></aside>
-      {% endblock contact %}
+      {%- endblock contact %}
 
       <article>
       <h2>Profile</h2>
