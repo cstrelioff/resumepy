@@ -16,7 +16,7 @@ import os
 import tempfile
 import shutil
 
-from resumepy import create_parser
+from resumepy import create_parser_resume
 from resumepy import FileError
 
 
@@ -25,7 +25,7 @@ class CommandLineTestCase(TestCase):
     Base TestCase class, sets up a CLI parser
     """
     def setUp(self):
-        self.parser = create_parser()
+        self.parser = create_parser_resume()
 
         self.tempdir = tempfile.mkdtemp()
         self.cwd = os.getcwd()

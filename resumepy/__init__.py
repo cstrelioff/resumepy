@@ -17,7 +17,7 @@ from .exceptions import CreateFileError  # noqa
 from .exceptions import DirError  # noqa
 from .exceptions import FileError  # noqa
 
-from .process import create_parser
+from .process import create_parser_resume
 from .process import process_html
 from .process import process_pdf
 from .process import process_text

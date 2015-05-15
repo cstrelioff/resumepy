@@ -34,7 +34,7 @@ from .utils import mkdirs
 resumepy_path = os.path.abspath(os.path.dirname(__file__))
 
 
-def create_parser():
+def create_parser_resume():
     """Create argparse parser and define project paths."""
 
     parser = argparse.ArgumentParser(description='Create resume from '
@@ -124,7 +124,7 @@ def process_text(resume, templates_path, template_filename):
 def main_resume():
     """Entry point for ``resumepy`` script."""
 
-    parser = create_parser()
+    parser = create_parser_resume()
     args = parser.parse_args()
 
     with open(args.file) as f:
