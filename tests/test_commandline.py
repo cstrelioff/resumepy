@@ -53,6 +53,15 @@ class CommandLineTestCase(TestCase):
         with self.assertRaises(FileError):
             self.parser.parse_args('-f file2.yml -o pdf'.split())
 
+    def test_html_output(self):
+        """
+        commandline: test_html_output()
+        """
+        args = self.parser.parse_args('-f file.yml -o html'.split())
+
+        self.assertEqual(args.file, 'file.yml')
+        self.assertEqual(args.output, 'html')
+
     def test_pdf_output(self):
         """
         commandline: test_pdf_output()
