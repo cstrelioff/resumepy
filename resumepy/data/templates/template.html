@@ -106,21 +106,21 @@
       </article>
       {%- endblock contact %}
 
+      {% block profile -%}
       <article>
       <h2>Profile</h2>
       </article>
 
-      {% block profile -%}
       <article class="article_full">
         <p>{{ summary | wordwrap }}</p>
       </article>
       {%- endblock profile %}
 
+      {% block education -%}
       <article>
       <h2>Education</h2>
       </article>
       
-      {% block education -%}
       {% for school in education -%}
       <article>
         <strong>
@@ -142,13 +142,13 @@
       </article>
       {% endif %}
       {% endfor -%}
-      {% endblock education -%}
+      {%- endblock education %}
 
+      {% block additional_education -%}
       <article>
       <h2>Additional Coursework</h2>
       </article>
 
-      {% block additional_education %}
       {% for school in additional_education -%}
       <article>
         <strong>{{ school.course }}</strong> <br /><br />
@@ -168,13 +168,13 @@
       </article>
       {% endif %}
       {% endfor -%}
-      {% endblock additional_education -%}
+      {%- endblock additional_education %}
 
+      {% block  work -%}
       <article>
       <h2>Work Experience</h2>
       </article>
     
-      {% block  work %}
       {% for job in work -%}
       <article>
         <strong>{{ job.position }}</strong> <br /><br />
@@ -194,13 +194,13 @@
       </article>
       {% endif %}
       {% endfor -%}
-      {% endblock work -%}
+      {%- endblock work %}
       
+      {% block projects -%}
       <article>
       <h2>Projects</h2>
       </article>
 
-      {% block projects %}
       {% for project in projects -%}
       <article>
         <strong>{{ project.title }}</strong> <br /><br />
@@ -220,13 +220,13 @@
       </article>
       {% endif %}
       {% endfor -%}
-      {% endblock projects -%}
+      {%- endblock projects %}
       
+      {% block skills -%}
       <article>
       <h2>Core Skills</h2>
       </article>
 
-      {% block skills -%}
       {% for skill in skills -%}
       <article>
         <strong>{{ skill.name }}</strong>
@@ -236,7 +236,7 @@
         <p>{{ skill.description | wordwrap }}</p>
       </article>
       {% endfor -%}
-      {% endblock skills -%}
+      {%- endblock skills %}
 
       {% block references -%}
       <article>
@@ -246,7 +246,7 @@
       <article>    
       Available upon request
       </article>
-      {% endblock references -%}
+      {%- endblock references %}
 
     <footer role="contentinfo" id="footer">
     </footer>
