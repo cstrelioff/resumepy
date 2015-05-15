@@ -41,7 +41,7 @@ setup(
                                'data/templates/*']},
     install_requires=['future', 'jinja2', 'pyyaml'],
     entry_points={
-        'console_scripts': ['resumepy=resumepy.process:main',
+        'console_scripts': ['resumepy=resumepy.process:main_resume',
                             'resumepy_example=resumepy.utils:copy_example'],
     },
 )

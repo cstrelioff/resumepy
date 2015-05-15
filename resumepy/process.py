@@ -121,7 +121,7 @@ def process_text(resume, templates_path, template_filename):
           os.path.join(cwd, "build", "txt")))
 
 
-def main():
+def main_resume():
     """Entry point for ``resumepy`` script."""
 
     parser = create_parser()
