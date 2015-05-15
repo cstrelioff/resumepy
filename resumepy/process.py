@@ -56,17 +56,9 @@ def process_html(resume, templates_path):
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template('template.html')
 
-    print("-- resumepy: creating bootstrap website...")
+    print("-- resumepy: creating html file...")
 
-    data_path = os.path.join(resumepy_path, 'data')
-    for d in ['js', 'css', 'fonts']:
-        source_dir = os.path.join(data_path, d)
-        target_dir = os.path.join('build', 'html', d)
-        mkdirs(target_dir)
-
-        for f in os.listdir(source_dir):
-            if os.path.isfile(os.path.join(source_dir, f)):
-                copy_file(os.path.join(source_dir, f), target_dir)
+    mkdirs(os.path.join('build', 'html'))
 
     with open(os.path.join('build', 'html', 'resume.html'), 'w') as f:
         f.write(template.render(resume))
