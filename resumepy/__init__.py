@@ -18,12 +18,12 @@ from .exceptions import DirError  # noqa
 from .exceptions import FileError  # noqa
 
 from .process import create_parser_resume
-from .process import process_html
-from .process import process_pdf
-from .process import process_text
+from .process import process_html_resume
+from .process import process_pdf_resume
+from .process import process_text_resume
 from .process import resumepy_path
 
 from .utils import copy_example
 
-__all__ = ['create_parser', 'process_html', 'process_pdf', 'process_text',
-           'resumepy_path', 'copy_example']
+__all__ = ['create_parser_resume', 'process_html_resume', 'process_pdf_resume',
+           'process_text_resume', 'resumepy_path', 'copy_example']

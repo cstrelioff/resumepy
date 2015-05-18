@@ -50,7 +50,7 @@ def create_parser_resume():
     return parser
 
 
-def process_html(resume, templates_path):
+def process_html_resume(resume, templates_path):
     """Process the html version of the resume."""
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
@@ -69,7 +69,7 @@ def process_html(resume, templates_path):
           os.path.join(cwd, "build", "html")))
 
 
-def process_pdf(resume, templates_path, template_filename):
+def process_pdf_resume(resume, templates_path, template_filename):
     """Process the pdf/LaTeX version of the resume."""
     env = jinja2.Environment(
         block_start_string='%{',
@@ -104,7 +104,7 @@ def process_pdf(resume, templates_path, template_filename):
           os.path.join(cwd, "build", "pdf")))
 
 
-def process_text(resume, templates_path, template_filename):
+def process_text_resume(resume, templates_path, template_filename):
     """Process the text verion of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template(template_filename)
@@ -142,12 +142,8 @@ def main_resume():
         templates = templates_path
 
     if args.output == 'txt':
-        process_text(resume, templates, template_file)
+        process_text_resume(resume, templates, template_file)
     elif args.output == 'html':
-        process_html(resume, templates)
+        process_html_resume(resume, templates)
     elif args.output == 'pdf':
-        process_pdf(resume, templates, template_file)
-
-
-if __name__ == '__main__':
-    main()
+        process_pdf_resume(resume, templates, template_file)

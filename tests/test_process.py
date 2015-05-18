@@ -18,9 +18,9 @@ import tempfile
 import shutil
 
 import yaml
-from resumepy import process_html
-from resumepy import process_pdf
-from resumepy import process_text
+from resumepy import process_html_resume
+from resumepy import process_pdf_resume
+from resumepy import process_text_resume
 from resumepy import resumepy_path
 
 
@@ -41,37 +41,28 @@ class ResumepyProcessTest(unittest.TestCase):
         shutil.rmtree(self.tempdir)
         os.chdir(self.cwd)
 
-    def test_process_html_created(self):
+    def test_process_html_resume_created(self):
         """
-        process: test_process_html_created()
+        process: test_process_html_resume_created()
         """
-        process_html(self.resume,
-                     os.path.join(resumepy_path, 'data', 'templates'))
+        process_html_resume(self.resume,
+                            os.path.join(resumepy_path, 'data', 'templates'))
         self.assertTrue(os.path.exists('build/html/resume.html'))
 
-    def test_process_pdf_bad(self):
+    def test_process_pdf_resume_created(self):
         """
-        process: test_process_pdf_bad()
+        process: test_process_pdf_resume_created()
         """
-        with self.assertRaises(Exception):
-            process_pdf(self.resume_bad,
-                        os.path.join(resumepy_path, 'data', 'templates'),
-                        'template.tex')
-
-    def test_process_pdf_created(self):
-        """
-        process: test_process_pdf_created()
-        """
-        process_pdf(self.resume,
-                    os.path.join(resumepy_path, 'data', 'templates'),
-                    'template.tex')
+        process_pdf_resume(self.resume,
+                           os.path.join(resumepy_path, 'data', 'templates'),
+                           'template.tex')
         self.assertTrue(os.path.exists('build/pdf/resume.pdf'))
 
-    def test_process_text_created(self):
+    def test_process_text_resume_created(self):
         """
-        process: test_process_text_created()
+        process: test_process_text_resume_created()
         """
-        process_text(self.resume,
-                     os.path.join(resumepy_path, 'data', 'templates'),
-                     'template.txt')
+        process_text_resume(self.resume,
+                            os.path.join(resumepy_path, 'data', 'templates'),
+                            'template.txt')
         self.assertTrue(os.path.exists('build/text/resume.txt'))
