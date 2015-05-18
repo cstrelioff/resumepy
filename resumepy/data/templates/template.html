@@ -70,9 +70,7 @@
   h1 {font-size: 2em;}
   h2 {font-size: 1.5em;}
   h3 {font-size: 1.25em;}
-  article h2 {padding: 5px; border-bottom: solid #999;}
-  h1{font-weight: 2; margin: 10px 0;}
-  h2, h3{font-weight: 1; margin: 10px 0;}
+  h1, h2, h3 {margin: 10px 0;}
   p {font-size: 1em; margin: 1px 0; line-height: 150%;}
   a {text-decoration: none; color:#000;}
   a:hover {color:#44f;}
@@ -84,6 +82,7 @@
   #contact {padding-top: 10px;}
 
   .article_full {padding: 5px 1em; margin: 0 5% 2px;}
+  .section_title {padding: 5px; border-bottom: solid #999;}
 
   @media only screen and (min-width: 650px) {
       article {width: 57%; float: left; margin-right: 0;}
@@ -102,13 +101,13 @@
       {% block contact -%}
       <article>
         <h1>{{contact.name}}</h1> 
-        <h3>{{contact.city}}, {{contact.state}}</h3>
+        <h2>{{contact.city}}, {{contact.state}}</h2>
       </article>
       {%- endblock contact %}
 
       {% block profile -%}
       <article>
-      <h2>Profile</h2>
+      <h2 class="section_title">Profile</h2>
       </article>
 
       <article class="article_full">
@@ -118,7 +117,7 @@
 
       {% block education -%}
       <article>
-      <h2>Education</h2>
+      <h2 class="section_title">Education</h2>
       </article>
       
       {% for school in education -%}
@@ -146,7 +145,7 @@
 
       {% block additional_education -%}
       <article>
-      <h2>Additional Coursework</h2>
+      <h2 class="section_title">Additional Coursework</h2>
       </article>
 
       {% for school in additional_education -%}
@@ -172,7 +171,7 @@
 
       {% block  work -%}
       <article>
-      <h2>Work Experience</h2>
+      <h2 class="section_title">Work Experience</h2>
       </article>
     
       {% for job in work -%}
@@ -198,7 +197,7 @@
       
       {% block projects -%}
       <article>
-      <h2>Projects</h2>
+      <h2 class="section_title">Projects</h2>
       </article>
 
       {% for project in projects -%}
@@ -224,7 +223,7 @@
       
       {% block skills -%}
       <article>
-      <h2>Core Skills</h2>
+      <h2 class="section_title">Core Skills</h2>
       </article>
 
       {% for skill in skills -%}
@@ -240,7 +239,7 @@
 
       {% block references -%}
       <article>
-      <h2>References</h2>
+      <h2 class="section_title">References</h2>
       </article>
     
       <article>    
