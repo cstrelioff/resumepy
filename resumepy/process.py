@@ -50,11 +50,10 @@ def create_parser_resume():
     return parser
 
 
-def process_html_resume(resume, templates_path):
+def process_html_resume(resume, templates_path, template_filename):
     """Process the html version of the resume."""
-
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
-    template = env.get_template('template.html')
+    template = env.get_template(template_filename)
 
     print("-- resumepy: creating html file...")
 
@@ -144,6 +143,6 @@ def main_resume():
     if args.output == 'txt':
         process_text_resume(resume, templates, template_file)
     elif args.output == 'html':
-        process_html_resume(resume, templates)
+        process_html_resume(resume, templates, template_file)
     elif args.output == 'pdf':
         process_pdf_resume(resume, templates, template_file)

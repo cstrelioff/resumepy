@@ -46,7 +46,8 @@ class ResumepyProcessTest(unittest.TestCase):
         process: test_process_html_resume_created()
         """
         process_html_resume(self.resume,
-                            os.path.join(resumepy_path, 'data', 'templates'))
+                            os.path.join(resumepy_path, 'data', 'templates'),
+                            'template.html')
         self.assertTrue(os.path.exists('build/html/resume.html'))
 
     def test_process_pdf_resume_created(self):
