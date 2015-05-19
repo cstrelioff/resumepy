@@ -42,6 +42,7 @@ setup(
     install_requires=['future', 'jinja2', 'pyyaml'],
     entry_points={
         'console_scripts': ['resumepy=resumepy.process:main_resume',
+                            'resumepy_letter=resumepy.process:main_letter',
                             'resumepy_example=resumepy.utils:copy_example'],
     },
 )

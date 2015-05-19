@@ -34,8 +34,26 @@ from .utils import mkdirs
 resumepy_path = os.path.abspath(os.path.dirname(__file__))
 
 
+def create_parser_letter():
+    """Create argparse parser for letter and define project paths."""
+
+    parser = argparse.ArgumentParser(description='Create cover letter from '
+                                     'yaml file.')
+    parser.add_argument('-f', dest='file', help='input yaml file',
+                        type=check_file, required=True)
+    parser.add_argument('-o', dest='output', help='output format',
+                        choices=['txt', 'pdf'],
+                        type=str, required=True)
+    parser.add_argument('-s', dest='signature', help='signature png file',
+                        type=check_file, required=False, default=None)
+    parser.add_argument('-t', dest='template', help='local template',
+                        type=check_file, required=False, default=None)
+
+    return parser
+
+
 def create_parser_resume():
-    """Create argparse parser and define project paths."""
+    """Create argparse parser for resume and define project paths."""
 
     parser = argparse.ArgumentParser(description='Create resume from '
                                      'yaml file.')
@@ -67,6 +85,47 @@ def process_html_resume(resume, templates_path, template_filename):
     print("-- resumepy: output in {}\n".format(
           os.path.join(cwd, "build", "html")))
 
+
+def process_pdf_letter(letter, templates_path, template_filename,
+                       signature=None):
+    """Process the pdf/LaTeX version of the cover letter."""
+    env = jinja2.Environment(
+        block_start_string='%{',
+        block_end_string='%}',
+        variable_start_string='%{{',
+        variable_end_string='%}}',
+        loader=jinja2.FileSystemLoader(templates_path))
+
+    template = env.get_template(template_filename)
+
+    mkdirs(os.path.join('build', 'pdf'))
+
+    if signature:
+        # copy file to build dir
+        copy_file(signature, os.path.join('build', 'pdf'))
+        # add signtaure filename to letter data structure for template
+        letter['signature'] = signature
+
+    with open(os.path.join('build', 'pdf', 'letter.tex'), 'w') as f:
+        f.write(template.render(letter))
+
+    print("-- resumepy_letter: creating pdf...")
+
+    try:
+        cwd = os.getcwd()
+        os.chdir(os.path.join("build", "pdf"))
+        command = ["pdflatex", "-interaction=batchmode", "letter.tex"]
+        subprocess.check_call(command)
+        os.chdir(cwd)
+    except:
+        msg = ("\n-- resumepy_letter: pdflatex failed.\n"
+               "  * Do you have Tex Live 2013 or 2014 availble?\n"
+               "  * Maybe you have special chars (&, $,..) in your yaml file?")
+
+        raise LaTeXError(msg)
+
+    print("-- resumepy_letter: output in {}\n".format(
+          os.path.join(cwd, "build", "pdf")))
 
 def process_pdf_resume(resume, templates_path, template_filename):
     """Process the pdf/LaTeX version of the resume."""
@@ -119,6 +178,33 @@ def process_text_resume(resume, templates_path, template_filename):
     print("-- resumepy: output in {}\n".format(
           os.path.join(cwd, "build", "txt")))
 
+
+def main_letter():
+    """Entry point for ``resumepy_letter`` script."""
+
+    parser = create_parser_letter()
+    args = parser.parse_args()
+
+    with open(args.file) as f:
+        letter = yaml.load(f)
+
+    templates_path = os.path.join(resumepy_path, 'data', 'templates')
+    if args.template:
+        template_file = args.template
+        templates = ['.', templates_path]
+    else:
+        if args.output == 'pdf':
+            template_file = 'letter.{}'.format('tex')
+        else:
+            template_file = 'letter.{}'.format(args.output)
+        templates = templates_path
+
+    if args.output == 'txt':
+        process_text_letter(letter, templates, template_file)
+    elif args.output == 'pdf' and args.signature:
+        process_pdf_letter(letter, templates, template_file, args.signature)
+    else:
+        process_pdf_letter(letter, templates, template_file)
 
 def main_resume():
     """Entry point for ``resumepy`` script."""
