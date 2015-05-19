@@ -6,9 +6,8 @@ contact:
   state: Any State
   zip: 99999
   email: jane-joe@expert.com
-  phone: 999.999.9999
-  jobtitle: Expert
-
+  phone: "999.999.9999"
+  web: "expert.com"
 website:
   label: website, fake
   link: expert.com
