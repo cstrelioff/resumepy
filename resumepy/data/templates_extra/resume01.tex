@@ -1,0 +1,278 @@
+%{- block documentheader %}
+%{- if fontsize %}
+\documentclass[%{{-fontsize-%}}]{article}
+%{- else %}
+\documentclass[12pt]{article}
+%{- endif %}
+
+% colors
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% FONT setup
+\usepackage{lmodern}
+\renewcommand\familydefault{\sfdefault}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+% set styling for tikz nodes used throughout document
+\tikzset{% 
+    default picture/.style={%
+        font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em
+    },
+    header/.style={%
+        minimum height=3.2em, minimum width=4.7in, text width=4.7in,
+        align=left, text=black!100, anchor=north west
+    },
+    header right/.style={%
+        minimum height=1.6em, minimum width=2.5in, text width=2.5in,
+        align=right, text=black!100, anchor=north east
+    },
+    sub header/.style={%
+        minimum height=1.6em, minimum width=4.7in, text width=4.7in,
+        align=left, text=black!100, anchor=north west
+    },
+    default line/.style={%
+        black!100, solid, thick
+    },
+    full width text/.style={%
+        minimum height=1em, minimum width=7.2in, text width=7.2in, align=left
+    },
+    section header/.style={%
+        minimum height=2em, minimum width=3in, text width=3in, align=left,
+        text=black!100
+    },
+    section sub header/.style={%
+        minimum height=1.3em, minimum width=7.2in, text width=7.2in,
+        align=left, anchor=north west
+    },
+    section sub list/.style={%
+        minimum height=1.3em, minimum width=7.2in, text width=7.2in,
+        anchor=north west
+    },
+    section sub header left/.style={%
+        minimum height=1.3em, minimum width=3.6in, text width=3.6in,
+        align=left, anchor=north west
+    },
+    section sub header left long/.style={%
+        minimum height=1.3em, minimum width=5.6in, text width=5.6in,
+        align=left, anchor=north west
+    },
+    section sub sub header left/.style={%
+        minimum height=1.3em, minimum width=4.6in, text width=4.6in,
+        align=left, anchor=north west
+    },
+    section sub header right/.style={%
+        minimum height=1.3em, minimum width=3.6in, text width=3.6in,
+        align=right, anchor=north west
+    },
+    section sub header right short/.style={%
+        minimum height=1.3em, minimum width=1.6in, text width=1.6in,
+        align=right, anchor=north west
+    },
+    section sub sub header right/.style={%
+        minimum height=1.3em, minimum width=2.6in, text width=2.6in,
+        align=right, anchor=north west
+    }
+}
+
+\usepackage{enumitem}
+% set style for lists
+\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=$-$, leftmargin=*}
+
+\usepackage{calc}
+\usepackage[paper=letterpaper, includefoot,
+            top=0.5in, bottom=0.5in, 
+            left=0.65in, right=0.65in]{geometry}
+
+\setlength{\parindent}{0in}
+
+% header, footer setup
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy} 
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{ %{{-contact.name%}} - %{{contact.email%}} }
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% PDF
+\usepackage{hyperref}
+\hypersetup{
+pdfstartview={FitH},
+pdftitle={ Resume :: %{{contact.name %}} },
+pdfauthor={ %{{contact.name %}} },
+pdfsubject={Resume for %{{ contact.name %}}},
+pdfcreator={pdflatex, resumepy},
+pdfproducer={pdflatex, resumepy},
+colorlinks=true,
+linkcolor=Black,
+urlcolor=Black
+%linkcolor=Mahogany,
+%urlcolor=Mahogany
+}
+%{- endblock documentheader %}
+
+\begin{document}
+
+%{ block contact %}
+\begin{tikzpicture}[default picture]
+\node[header]       at (0in, 0.0em)    {\Huge %{{contact.name-%}} };
+\node[header right] at (7.2in, 0em)    {\large \href{mailto:%{{-contact.email-%}} }{ %{{-contact.email-%}} } };
+\node[header right] at (7.2in, -1.6em) {\large \href{ %{{-website.link-%}} }{ %{{-website.label-%}} } };
+\node[header right] at (7.2in, -3.2em) { %{{contact.phone%}} };
+\node[sub header]   at (0in, -3.2em)   {\Large %{{contact.jobtitle%}} :: %{{contact.city%}}, %{{contact.state%}}};
+%\draw[default line] (0in, -5.2em) -- (7.2in, -5.2em);
+\end{tikzpicture}
+%{- endblock contact %}
+
+
+%{ block profile %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header]  (summary) {\Large Profile};
+\end{tikzpicture}
+
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[full width text] {  %{{-summary-%}} };
+\end{tikzpicture}
+%{- endblock profile %}
+
+
+%{ block education %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header]  (education) {\Large Education};
+%\draw[default line] (education.south west) -- (education.south east);
+\end{tikzpicture}
+
+%{ for school in education %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-school.degree%}}, %{{school.focus-%}} }  --  \href{ %{{-school.web-%}} }{ %{{-school.schoolname-%}} } };
+\node[section sub header right short] at (5.6in, 0em) {  %{{school.graduation-%}} };
+
+%{- if school.notes %}
+\node[section sub list] at (0in, -1.3em) { 
+  \begin{itemize}
+%{- for note in school.notes %}
+    \item %{{ note%}} 
+%{- endfor %}
+  \end{itemize}\par};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endblock education %}
+
+
+%{ block additional_education %}
+%{- if additional_education %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header]  (certificates) {\Large Additional Coursework};
+\end{tikzpicture}
+
+%{ for school in additional_education %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-school.course-%}} } -- %{{school.schoolname%}}};
+\node[section sub header right short] at (5.6in, 0em) { %{{school.completed%}} };
+%{- if school.notes %}
+\node[section sub list] at (0in, -1.3em) {
+  \begin{itemize}
+    %{- for note in school.notes %}
+    \item  %{{ note %}} 
+    %{- endfor %}
+  \end{itemize}\par};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endif %}
+%{- endblock additional_education %}
+
+
+%{ block  work %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header] (experience) at (0em, 0em) {\Large Work Experience};
+%\draw[default line] (experience.south west) -- (experience.south east);
+\end{tikzpicture}
+
+%{ for job in work %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[section sub header left long] at (0em, 0em) { \textbf{ %{{-job.position-%}} } -- \href{ %{{-job.web-%}} }{ %{{-job.organization-%}} } };
+\node[section sub header right short] at (5.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
+%{- if job.notes %}
+\node[section sub list] at (0in, -1.3em) { 
+\begin{itemize}
+%{- for note in job.notes %}
+    \item %{{ note %}}
+%{- endfor %}
+  \end{itemize}};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endblock work %}
+
+
+%{ block projects %}
+%{- if projects %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header]  (projects) {\Large Projects};
+\end{tikzpicture}
+
+%{ for project in projects %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-project.title-%}} } -- \href{ %{{-project.web-%}} }{ %{{-project.web-%}} }  };
+\node[section sub header right short] at (5.6in, 0em) { %{{project.date%}} };
+%{- if project.notes %}
+\node[section sub list] at (0in, -1.3em) {
+  \begin{itemize}
+    %{- for note in project.notes %}
+    \item  %{{ note %}} 
+    %{- endfor %}
+  \end{itemize}\par};
+%{- endif %}
+\end{tikzpicture}
+%{ endfor %}
+%{- endif %}
+%{- endblock projects %}
+
+
+%{ block skills %}
+%{- if skills %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header] (skills) at (0em, 0em) {\Large Core Skills};
+%\draw[default line] (skills.south west) -- (skills.south east);
+\end{tikzpicture}
+
+%{ for skill in skills %}
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[full width text] at (0in, 0em) { \textbf{ %{{-skill.name-%}} }  --  %{{skill.description %}} };
+\end{tikzpicture}
+%{ endfor %}
+%{ endif %}
+
+%{ endblock skills %}
+
+
+%{- block references %}
+\vskip1em
+\begin{tikzpicture}[default picture]
+\node[section header] (references) {\Large References};
+\end{tikzpicture}
+
+\vskip0.5em
+\begin{tikzpicture}[default picture]
+\node[full width text]  {Available upon request.};
+\end{tikzpicture}
+%{- endblock references %}
+
+\end{document}
