@@ -74,44 +74,45 @@ urlcolor=Black
 
 %{ block contact -%}
 
-%{{ contact.name %}}
+\textbf{ %{{- contact.name | escape_tex -%}} }
+\hfill \textbf{web:} \href{http://%{{- contact.web | escape_tex -%}} }{ %{{- contact.web | escape_tex -%}} }
 
 \vskip-0.75em
 \begin{tikzpicture}[default picture]
 \draw[default line] (0in, 0) -- (7.2in, 0);
 \end{tikzpicture}
 
-%{{contact.address%}} %{{contact.city%}}, %{{contact.state%}} %{{contact.zip%}} \\
-{\bf T:} %{{ contact.phone %}} {\bf E:} \href{mailto:%{{-contact.email-%}} }{ %{{-contact.email-%}} }
+%{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\
+\textbf{tel:} %{{ contact.phone %}} \textbf{email:} \href{mailto:%{{- contact.email -%}} }{ %{{- contact.email -%}} }
 %{- endblock contact %}
 
 %{ block company -%}
 \vskip2em
-%{ if company.contact -%} %{{company.contact-%}} \\ %{- endif %}
-%{ if company.jobtitle -%} %{{company.jobtitle-%}} \\ %{- endif %}
-%{{company.name-%}} \\
-%{{company.address%}} \\
-%{{contact.city%}}, %{{contact.state%}} %{{contact.zip%}}
+%{ if company.contact -%} %{{ company.contact | escape_tex -%}} \\ %{- endif %}
+%{ if company.jobtitle -%} %{{ company.jobtitle | escape_tex -%}} \\ %{- endif %}
+%{{ company.name | escape_tex -%}} \\
+%{{ company.address | escape_tex %}} \\
+%{{ contact.city %}}, %{{ contact.state %}} %{{ contact.zip %}}
 %{- endblock company %}
 
 %{ block open -%}
 \vskip2em
 \today
 \vskip2em
-%{{ salutation %}}
+%{{ salutation | escape_tex %}}
 %{- endblock open -%}
 
 %{ block letter -%}
 \vskip2em
 \begin{tikzpicture}[default picture]
-\node[full width text] at (0in, 0in) { %{{ letter | wordwrap %}} };
+\node[full width text] at (0in, 0in) { %{{ letter | escape_tex | wordwrap %}} };
 \end{tikzpicture}
 %{- endblock letter %}
 
 %{ block close -%}
 %{ if signature %}
 \vskip2em
-%{{ closing %}}
+%{{ closing | escape_tex %}}
 \vskip1em
 \pgfdeclareimage[]{signature}{ %{{- signature -%}} }
 \scalebox{0.4}{
