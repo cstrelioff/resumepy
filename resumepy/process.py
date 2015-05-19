@@ -21,6 +21,7 @@ from future.builtins import (ascii, bytes, chr, dict, filter, hex, input,  # noq
 import os
 import argparse
 import subprocess
+import re
 
 import yaml
 import jinja2
@@ -32,6 +33,23 @@ from .utils import copy_file
 from .utils import mkdirs
 
 resumepy_path = os.path.abspath(os.path.dirname(__file__))
+
+# kudos to: http://flask.pocoo.org/snippets/55/
+LATEX_SUBS = (
+    (re.compile(r'\\'), r'\\textbackslash'),
+    (re.compile(r'([{}_#%&$])'), r'\\\1'),
+    (re.compile(r'~'), r'\~{}'),
+    (re.compile(r'\^'), r'\^{}'),
+    (re.compile(r'"'), r"''"),
+    (re.compile(r'\.\.\.+'), r'\\ldots'),
+)
+
+
+def escape_tex(value):
+    newval = value
+    for pattern, replacement in LATEX_SUBS:
+        newval = pattern.sub(replacement, newval)
+    return newval
 
 
 def create_parser_letter():
@@ -96,6 +114,8 @@ def process_pdf_letter(letter, templates_path, template_filename,
         variable_end_string='%}}',
         loader=jinja2.FileSystemLoader(templates_path))
 
+    env.filters['escape_tex'] = escape_tex
+
     template = env.get_template(template_filename)
 
     mkdirs(os.path.join('build', 'pdf'))
@@ -135,6 +155,8 @@ def process_pdf_resume(resume, templates_path, template_filename):
         variable_start_string='%{{',
         variable_end_string='%}}',
         loader=jinja2.FileSystemLoader(templates_path))
+
+    env.filters['escape_tex'] = escape_tex
 
     template = env.get_template(template_filename)
 
