@@ -21,59 +21,11 @@
     default picture/.style={%
         font=\normalsize, node distance=0em, outer sep=0em, inner sep=0em
     },
-    header/.style={%
-        minimum height=3.2em, minimum width=4.7in, text width=4.7in,
-        align=left, text=black!100, anchor=north west
-    },
-    header right/.style={%
-        minimum height=1.6em, minimum width=2.5in, text width=2.5in,
-        align=right, text=black!100, anchor=north east
-    },
-    sub header/.style={%
-        minimum height=1.6em, minimum width=4.7in, text width=4.7in,
-        align=left, text=black!100, anchor=north west
-    },
     default line/.style={%
         black!100, solid, thick
     },
     full width text/.style={%
         minimum height=1em, minimum width=7.2in, text width=7.2in, align=left
-    },
-    section header/.style={%
-        minimum height=2em, minimum width=3in, text width=3in, align=left,
-        text=black!100
-    },
-    section sub header/.style={%
-        minimum height=1.3em, minimum width=7.2in, text width=7.2in,
-        align=left, anchor=north west
-    },
-    section sub list/.style={%
-        minimum height=1.3em, minimum width=7.2in, text width=7.2in,
-        anchor=north west
-    },
-    section sub header left/.style={%
-        minimum height=1.3em, minimum width=3.6in, text width=3.6in,
-        align=left, anchor=north west
-    },
-    section sub header left long/.style={%
-        minimum height=1.3em, minimum width=5.6in, text width=5.6in,
-        align=left, anchor=north west
-    },
-    section sub sub header left/.style={%
-        minimum height=1.3em, minimum width=4.6in, text width=4.6in,
-        align=left, anchor=north west
-    },
-    section sub header right/.style={%
-        minimum height=1.3em, minimum width=3.6in, text width=3.6in,
-        align=right, anchor=north west
-    },
-    section sub header right short/.style={%
-        minimum height=1.3em, minimum width=1.6in, text width=1.6in,
-        align=right, anchor=north west
-    },
-    section sub sub header right/.style={%
-        minimum height=1.3em, minimum width=2.6in, text width=2.6in,
-        align=right, anchor=north west
     }
 }
 
@@ -93,7 +45,7 @@
 \pagestyle{fancy} 
 \fancyhead{}
 \fancyfoot{}
-\fancyfoot[C]{ %{{-contact.name%}} - %{{contact.email%}} }
+\fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -101,9 +53,9 @@
 \usepackage{hyperref}
 \hypersetup{
 pdfstartview={FitH},
-pdftitle={ Resume :: %{{contact.name %}} },
-pdfauthor={ %{{contact.name %}} },
-pdfsubject={Resume for %{{ contact.name %}}},
+pdftitle={Resume -- %{{contact.name | escape_tex  %}} },
+pdfauthor={%{{contact.name | escape_tex  %}}},
+pdfsubject={Resume for %{{ contact.name | escape_tex  %}}},
 pdfcreator={pdflatex, resumepy},
 pdfproducer={pdflatex, resumepy},
 colorlinks=true,
@@ -116,53 +68,47 @@ urlcolor=Black
 
 \begin{document}
 
-%{ block contact %}
-\begin{tikzpicture}[default picture]
-\node[header]       at (0in, 0.0em)    {\Huge %{{contact.name-%}} };
-\node[header right] at (7.2in, 0em)    {\large \href{mailto:%{{-contact.email-%}} }{ %{{-contact.email-%}} } };
-\node[header right] at (7.2in, -1.6em) {\large \href{ %{{-website.link-%}} }{ %{{-website.label-%}} } };
-\node[header right] at (7.2in, -3.2em) { %{{contact.phone%}} };
-\node[sub header]   at (0in, -3.2em)   {\Large %{{contact.jobtitle%}} :: %{{contact.city%}}, %{{contact.state%}}};
-%\draw[default line] (0in, -5.2em) -- (7.2in, -5.2em);
-\end{tikzpicture}
-%{- endblock contact %}
+%{ block contact -%}
 
+\textbf{ %{{- contact.name | escape_tex -%}} }
+\hfill \textbf{web:} \href{http://%{{- contact.web | escape_tex -%}} }{ %{{- contact.web | escape_tex -%}} }
+
+\vskip-0.75em
+\begin{tikzpicture}[default picture]
+\draw[default line] (0in, 0) -- (7.2in, 0);
+\end{tikzpicture}
+
+%{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\
+\textbf{tel:} %{{ contact.phone %}} \textbf{email:} \href{mailto:%{{- contact.email -%}} }{ %{{- contact.email -%}} }
+%{- endblock contact %}
 
 %{ block profile %}
 \vskip1em
+\textbf{Profile}
+\vskip1em
 \begin{tikzpicture}[default picture]
-\node[section header]  (summary) {\Large Profile};
-\end{tikzpicture}
-
-\vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[full width text] {  %{{-summary-%}} };
+\node[full width text] {  %{{- summary | escape_tex | wordwrap -%}} };
 \end{tikzpicture}
 %{- endblock profile %}
 
 
 %{ block education %}
 \vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header]  (education) {\Large Education};
-%\draw[default line] (education.south west) -- (education.south east);
-\end{tikzpicture}
+\textbf{Education}
 
 %{ for school in education %}
 \vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-school.degree%}}, %{{school.focus-%}} }  --  \href{ %{{-school.web-%}} }{ %{{-school.schoolname-%}} } };
-\node[section sub header right short] at (5.6in, 0em) {  %{{school.graduation-%}} };
+%{{ school.degree | escape_tex %}}, %{{ school.focus | escape_tex %}} \hfill %{{ school.graduation %}} \\
+\href{ %{{-school.web-%}} }{ %{{- school.schoolname | escape_tex -%}} }
 
 %{- if school.notes %}
-\node[section sub list] at (0in, -1.3em) { 
-  \begin{itemize}
+\vskip0.25em
+\begin{itemize}
 %{- for note in school.notes %}
-    \item %{{ note%}} 
+  \item %{{ note | escape_tex | wordwrap %}} 
 %{- endfor %}
-  \end{itemize}\par};
+\end{itemize}
 %{- endif %}
-\end{tikzpicture}
 %{ endfor %}
 %{- endblock education %}
 
@@ -170,24 +116,21 @@ urlcolor=Black
 %{ block additional_education %}
 %{- if additional_education %}
 \vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header]  (certificates) {\Large Additional Coursework};
-\end{tikzpicture}
+\textbf{Additional Coursework}
 
 %{ for school in additional_education %}
 \vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-school.course-%}} } -- %{{school.schoolname%}}};
-\node[section sub header right short] at (5.6in, 0em) { %{{school.completed%}} };
+%{{ school.course | escape_tex %}} \hfill %{{ school.completed | escape_tex %}} \\
+%{{school.schoolname%}}
+
 %{- if school.notes %}
-\node[section sub list] at (0in, -1.3em) {
-  \begin{itemize}
-    %{- for note in school.notes %}
-    \item  %{{ note %}} 
-    %{- endfor %}
-  \end{itemize}\par};
+\vskip0.25em
+\begin{itemize}
+%{- for note in school.notes %}
+  \item  %{{ note | escape_tex | wordwrap %}} 
+%{- endfor %}
+\end{itemize}
 %{- endif %}
-\end{tikzpicture}
 %{ endfor %}
 %{- endif %}
 %{- endblock additional_education %}
@@ -195,25 +138,21 @@ urlcolor=Black
 
 %{ block  work %}
 \vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header] (experience) at (0em, 0em) {\Large Work Experience};
-%\draw[default line] (experience.south west) -- (experience.south east);
-\end{tikzpicture}
+\textbf{Work Experience}
 
 %{ for job in work %}
 \vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[section sub header left long] at (0em, 0em) { \textbf{ %{{-job.position-%}} } -- \href{ %{{-job.web-%}} }{ %{{-job.organization-%}} } };
-\node[section sub header right short] at (5.6in, 0em)    { %{{-job.start%}} -- %{{job.stop-%}} };
+%{{job.position | escape_tex %}} \hfill %{{ job.start %}} -- %{{ job.stop %}} \\
+\href{ %{{- job.web -%}} }{ %{{- job.organization | escape_tex -%}} }
+
 %{- if job.notes %}
-\node[section sub list] at (0in, -1.3em) { 
+\vskip0.25em
 \begin{itemize}
 %{- for note in job.notes %}
-    \item %{{ note %}}
+  \item %{{ note | escape_tex | wordwrap %}}
 %{- endfor %}
-  \end{itemize}};
+\end{itemize}
 %{- endif %}
-\end{tikzpicture}
 %{ endfor %}
 %{- endblock work %}
 
@@ -221,24 +160,20 @@ urlcolor=Black
 %{ block projects %}
 %{- if projects %}
 \vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header]  (projects) {\Large Projects};
-\end{tikzpicture}
+\textbf{Projects}
 
 %{ for project in projects %}
 \vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[section sub header left long] at (0in, 0em) { \textbf{ %{{-project.title-%}} } -- \href{ %{{-project.web-%}} }{ %{{-project.web-%}} }  };
-\node[section sub header right short] at (5.6in, 0em) { %{{project.date%}} };
+%{{- project.title | escape_tex %}} \hfill %{{ project.date %}} \\
+\href{ %{{- project.web -%}} }{ %{{- project.web | escape_tex -%}} }
+
 %{- if project.notes %}
-\node[section sub list] at (0in, -1.3em) {
-  \begin{itemize}
-    %{- for note in project.notes %}
-    \item  %{{ note %}} 
-    %{- endfor %}
-  \end{itemize}\par};
+\begin{itemize}
+%{- for note in project.notes %}
+  \item  %{{ note | escape_tex | wordwrap  %}} 
+%{- endfor %}
+\end{itemize}
 %{- endif %}
-\end{tikzpicture}
 %{ endfor %}
 %{- endif %}
 %{- endblock projects %}
@@ -247,15 +182,12 @@ urlcolor=Black
 %{ block skills %}
 %{- if skills %}
 \vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header] (skills) at (0em, 0em) {\Large Core Skills};
-%\draw[default line] (skills.south west) -- (skills.south east);
-\end{tikzpicture}
+\textbf{Core Skills}
 
 %{ for skill in skills %}
-\vskip0.5em
+\vskip1em
 \begin{tikzpicture}[default picture]
-\node[full width text] at (0in, 0em) { \textbf{ %{{-skill.name-%}} }  --  %{{skill.description %}} };
+\node[full width text] at (0in, 0em) {\textit{ %{{- skill.name | escape_tex %}} --} %{{ skill.description | escape_tex %}} };
 \end{tikzpicture}
 %{ endfor %}
 %{ endif %}
@@ -265,14 +197,10 @@ urlcolor=Black
 
 %{- block references %}
 \vskip1em
-\begin{tikzpicture}[default picture]
-\node[section header] (references) {\Large References};
-\end{tikzpicture}
+\textbf{References}
 
 \vskip0.5em
-\begin{tikzpicture}[default picture]
-\node[full width text]  {Available upon request.};
-\end{tikzpicture}
+Available upon request.
 %{- endblock references %}
 
 \end{document}
