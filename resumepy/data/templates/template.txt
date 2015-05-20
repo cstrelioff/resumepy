@@ -2,10 +2,10 @@
 {{contact.name}}
 
 {{contact.email}}
-{{website.link}} 
+{{contact.web}} 
 {{contact.phone}}
 
-{{contact.jobtitle}} :: {{contact.city}}, {{contact.state}}
+{{contact.city}}, {{contact.state}}
 {%- endblock contact %}
 
 {% block profile -%}
