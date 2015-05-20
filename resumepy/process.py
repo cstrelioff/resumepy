@@ -185,7 +185,7 @@ def process_pdf_resume(resume, templates_path, template_filename):
 
 
 def process_text_resume(resume, templates_path, template_filename):
-    """Process the text verion of the resume."""
+    """Process the text version of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
     template = env.get_template(template_filename)
 
