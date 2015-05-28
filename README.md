@@ -26,7 +26,7 @@ install
 
 * A quick test:
 
-`` bash
+``` bash
 
     (resumepy_git):~$ resumepy -h
     usage: resumepy [-h] -f FILE -o {txt,html,pdf} [-t TEMPLATE]
