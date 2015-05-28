@@ -3,7 +3,10 @@ resumepy
 
 Python package for resumes: YAML input to HTML, PDF, or TEXT output.
 
-Tested on Ubuntu 14.04 using TeXLive1 2013.
+Notes
+-----
+
+* Tested on Ubuntu 14.04 using TeXLive 2013
 
 install
 -------
