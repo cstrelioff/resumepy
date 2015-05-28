@@ -1,25 +1,35 @@
-resumepy
-========
+# resumepy
 
 Python package for resumes: YAML input to HTML, PDF, or TEXT output.
 
-notes
------
+## notes
 
 * Tested on Ubuntu 14.04 using Python 2.7 and 3.4 with TeXLive 2013
 
-install
--------
+## install
 
-* Create a virtualenv
+
+### Ubuntu 14.04
+
+1. Create a virtualenv, *using Python 2.7*:
 
 ``` bash
 
-    $ mkvirtualenv resumpy_git
+    $ mkvirtualenv resumepy_git
 
 ```
 
-* Install, from github, using pip
+or, *using Python 3.4*:
+
+
+``` bash
+
+    $ mkvirtualenv resumepy_git -p /usr/bin/python3
+
+```
+
+
+2. Install, from github, using pip
 
 ``` bash
 
@@ -27,7 +37,7 @@ install
 
 ```
 
-* A quick test:
+3. A quick test, get the script help:
 
 ``` bash
 
