@@ -3,10 +3,10 @@ resumepy
 
 Python package for resumes: YAML input to HTML, PDF, or TEXT output.
 
-Notes
+notes
 -----
 
-* Tested on Ubuntu 14.04 using TeXLive 2013
+* Tested on Ubuntu 14.04 using Python 2.7 and 3.4 with TeXLive 2013
 
 install
 -------
@@ -15,7 +15,7 @@ install
 
 ``` bash
 
-    $ mkvirtualencv resumpy_git
+    $ mkvirtualenv resumpy_git
 
 ```
 
