@@ -1,0 +1,33 @@
+{% block contact %}
+{{ contact.name }}
+{{ contact.address }}
+{{ contact.city }}, {{ contact.state }} {{ contact.zip }}
+{% endblock contact %}
+
+{% block company %}
+{% if company.contact %}
+{{ company.contact }}
+{% endif %}
+{% if company.jobtitle %}
+{{ company.jobtitle }}
+{% endif %}
+{{ company.name }}
+{{ company.address }}
+{{ contact.city }}, {{ contact.state }} {{ contact.zip }}
+{% endblock company %}
+
+{% block open -%}
+Today's Date
+
+{{ salutation }}
+{% endblock open %}
+
+{% block letter %}
+{{ letter | wordwrap }}
+{% endblock letter %}
+
+{% block close %}
+{{ closing }}
+{{ contact.name }}
+{% endblock close %}
+
