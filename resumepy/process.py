@@ -184,6 +184,24 @@ def process_pdf_resume(resume, templates_path, template_filename):
           os.path.join(cwd, "build", "pdf")))
 
 
+def process_text_letter(letter, templates_path, template_filename):
+    """Process the text version of the resume."""
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path),
+                             trim_blocks=True, lstrip_blocks=True)
+    template = env.get_template(template_filename)
+
+    print("-- resumepy_letter: creating text cover letter...")
+
+    mkdirs(os.path.join('build', 'text'))
+
+    with open(os.path.join('build', 'text', 'letter.txt'), 'w') as f:
+        f.write(template.render(letter))
+
+    cwd = os.getcwd()
+    print("-- resumepy_letter: output in {}\n".format(
+          os.path.join(cwd, "build", "txt")))
+
+
 def process_text_resume(resume, templates_path, template_filename):
     """Process the text version of the resume."""
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_path))
@@ -222,6 +240,8 @@ def main_letter():
         templates = templates_path
 
     if args.output == 'txt':
+        if args.signature:
+            print("-- no signature with text cover letter...")
         process_text_letter(letter, templates, template_file)
     elif args.output == 'pdf' and args.signature:
         process_pdf_letter(letter, templates, template_file, args.signature)
