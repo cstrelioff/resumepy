@@ -180,17 +180,19 @@ urlcolor=Black
 
 
 %{ block skills %}
-%{- if skills %}
 \vskip1em
 \textbf{Core Skills}
 
 %{ for skill in skills %}
-\vskip1em
-\begin{tikzpicture}[default picture]
-\node[full width text] at (0in, 0em) {\textit{ %{{- skill.name | escape_tex %}} --} %{{ skill.description | escape_tex %}} };
-\end{tikzpicture}
+\vskip0.5em
+%{{- skill.name | escape_tex %}}
+
+\begin{itemize}
+%{- for note in skill.notes %}
+  \item %{{ note | escape_tex | wordwrap %}}
+%{- endfor %}
+\end{itemize}
 %{ endfor %}
-%{ endif %}
 
 %{ endblock skills %}
 
