@@ -99,16 +99,6 @@ urlcolor=Black
 \textbf{tel:} %{{ contact.phone %}} \textbf{email:} \href{mailto:%{{- contact.email -%}} }{ %{{- contact.email -%}} }
 %{- endblock contact %}
 
-%{ block profile %}
-\vskip1em
-\sandwich~\textbf{Profile}
-\vskip1em
-\begin{tikzpicture}[default picture]
-\node[full width text] {  %{{- summary | escape_tex | wordwrap -%}} };
-\end{tikzpicture}
-%{- endblock profile %}
-
-
 %{ block education %}
 \vskip1em
 \sandwich~\textbf{Education}
