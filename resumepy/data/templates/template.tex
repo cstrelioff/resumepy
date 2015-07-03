@@ -29,9 +29,26 @@
     }
 }
 
+\newcommand{\sandwich}{
+  \tikz[]{
+    \draw [gray, line width=1.5] (0ex,0.0ex) -- (2ex,0ex);
+    \draw [gray, line width=1.5]  (0ex,0.75ex) -- (2ex,0.75ex);
+    \draw [gray, line width=1.5] (0ex,1.5ex) -- (2ex,1.5ex);
+}}
+
+\newcommand{\thickdash}{
+  \tikz[baseline=-0.75ex]{
+    \draw [black, line width=0.75]  (0ex,0ex) -- (2ex,0ex);
+}}
+
+\newcommand{\thickcircle}{
+  \tikz[baseline=-0.75ex]{
+	  \draw [black, line width=0.5] (0ex,0ex) circle [radius=0.3ex];
+}}
+
 \usepackage{enumitem}
 % set style for lists
-\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=$-$, leftmargin=*}
+\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=\thickcircle, leftmargin=*}
 
 \usepackage{calc}
 \usepackage[paper=letterpaper, includefoot,
@@ -84,7 +101,7 @@ urlcolor=Black
 
 %{ block profile %}
 \vskip1em
-\textbf{Profile}
+\sandwich~\textbf{Profile}
 \vskip1em
 \begin{tikzpicture}[default picture]
 \node[full width text] {  %{{- summary | escape_tex | wordwrap -%}} };
@@ -94,11 +111,11 @@ urlcolor=Black
 
 %{ block education %}
 \vskip1em
-\textbf{Education}
+\sandwich~\textbf{Education}
 
 %{ for school in education %}
 \vskip0.5em
-%{{ school.degree | escape_tex %}}, %{{ school.focus | escape_tex %}} \hfill %{{ school.graduation %}} \\
+\textbf{ %{{- school.degree | escape_tex %}}, %{{ school.focus | escape_tex %}} } \hfill %{{ school.graduation %}} \\
 \href{ %{{-school.web-%}} }{ %{{- school.schoolname | escape_tex -%}} }
 
 %{- if school.notes %}
@@ -116,11 +133,11 @@ urlcolor=Black
 %{ block additional_education %}
 %{- if additional_education %}
 \vskip1em
-\textbf{Additional Coursework}
+\sandwich~\textbf{Additional Coursework}
 
 %{ for school in additional_education %}
 \vskip0.5em
-%{{ school.course | escape_tex %}} \hfill %{{ school.completed | escape_tex %}} \\
+\textbf{ %{{- school.course | escape_tex %}} } \hfill %{{ school.completed %}} \\
 %{{school.schoolname%}}
 
 %{- if school.notes %}
@@ -138,11 +155,11 @@ urlcolor=Black
 
 %{ block  work %}
 \vskip1em
-\textbf{Work Experience}
+\sandwich~\textbf{Work Experience}
 
 %{ for job in work %}
 \vskip0.5em
-%{{job.position | escape_tex %}} \hfill %{{ job.start %}} -- %{{ job.stop %}} \\
+\textbf{ %{{- job.position | escape_tex %}} } \hfill %{{ job.start %}} -- %{{ job.stop %}} \\
 \href{ %{{- job.web -%}} }{ %{{- job.organization | escape_tex -%}} }
 
 %{- if job.notes %}
@@ -160,13 +177,13 @@ urlcolor=Black
 %{ block projects %}
 %{- if projects %}
 \vskip1em
-\textbf{Projects}
+\sandwich~\textbf{Projects}
 
 %{ for project in projects %}
-\vskip0.5em
-%{{- project.title | escape_tex %}} \hfill %{{ project.date %}} \\
+\vskip0.25em
+\textbf{ %{{- project.title | escape_tex %}} } \hfill %{{ project.date %}} \\
 \href{ %{{- project.web -%}} }{ %{{- project.web | escape_tex -%}} }
-
+\vskip0.25em
 %{- if project.notes %}
 \begin{itemize}
 %{- for note in project.notes %}
@@ -181,12 +198,12 @@ urlcolor=Black
 
 %{ block skills %}
 \vskip1em
-\textbf{Core Skills}
+\sandwich~\textbf{Core Skills}
 
 %{ for skill in skills %}
-\vskip0.5em
-%{{- skill.name | escape_tex %}}
-
+\vskip0.25em
+\textbf{ %{{- skill.name | escape_tex %}} }
+\vskip0.25em
 \begin{itemize}
 %{- for note in skill.notes %}
   \item %{{ note | escape_tex | wordwrap %}}
