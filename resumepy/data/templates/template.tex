@@ -29,21 +29,22 @@
     }
 }
 
-\newcommand{\sandwich}{
-  \tikz[]{
-    \draw [gray, line width=1.5] (0ex,0.0ex) -- (2ex,0ex);
-    \draw [gray, line width=1.5]  (0ex,0.75ex) -- (2ex,0.75ex);
-    \draw [gray, line width=1.5] (0ex,1.5ex) -- (2ex,1.5ex);
-}}
+% color palette
+\definecolor{ColorOne}{RGB}{89, 148, 143}
+\definecolor{ColorTwo}{RGB}{33, 79, 84}
 
-\newcommand{\thickdash}{
-  \tikz[baseline=-0.75ex]{
-    \draw [black, line width=0.75]  (0ex,0ex) -- (2ex,0ex);
+
+\newcommand{\MySquare}{
+  \tikz[]{
+    \draw [ColorOne, line width=1.5] (0ex, 0ex)    -- (2ex, 0ex);	  
+    \draw [ColorOne, line width=1.5] (0ex, 0.75ex) -- (2ex, 0.75ex);	  
+    \draw [ColorOne, line width=1.5] (0ex, 1.5ex)  -- (2ex, 1.5ex);	  
+    %\fill [ColorOne] (0ex, 0em) rectangle (1ex, 1ex);
 }}
 
 \newcommand{\thickcircle}{
   \tikz[baseline=-0.75ex]{
-	  \draw [black, line width=0.5] (0ex,0ex) circle [radius=0.3ex];
+    \fill [ColorTwo] (0ex,0ex) circle [radius=0.3ex];
 }}
 
 \usepackage{enumitem}
@@ -83,6 +84,7 @@ urlcolor=Black
 }
 %{- endblock documentheader %}
 
+
 \begin{document}
 
 %{ block contact -%}
@@ -90,18 +92,19 @@ urlcolor=Black
 \textbf{ %{{- contact.name | escape_tex -%}} }
 \hfill \textbf{web:} \href{http://%{{- contact.web | escape_tex -%}} }{ %{{- contact.web | escape_tex -%}} }
 
-\vskip-0.75em
+\vskip-0.5em
 \begin{tikzpicture}[default picture]
-\draw[default line] (0in, 0) -- (7.2in, 0);
+\draw[ColorTwo, line width=1.5] (0in, 0) -- (7.2in, 0);
 \end{tikzpicture}
 
-%{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\
+%{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\[0.25em]
 \textbf{tel:} %{{ contact.phone %}} \textbf{email:} \href{mailto:%{{- contact.email -%}} }{ %{{- contact.email -%}} }
 %{- endblock contact %}
 
 %{ block education %}
-\vskip1em
-\sandwich~\textbf{Education}
+\vskip1.0em
+\MySquare~\textbf{Education}
+\vskip0.5em
 
 %{ for school in education %}
 \vskip0.5em
@@ -122,8 +125,9 @@ urlcolor=Black
 
 %{ block additional_education %}
 %{- if additional_education %}
-\vskip1em
-\sandwich~\textbf{Additional Coursework}
+\vskip1.0em
+\MySquare~\textbf{Additional Coursework}
+\vskip0.5em
 
 %{ for school in additional_education %}
 \vskip0.5em
@@ -145,7 +149,8 @@ urlcolor=Black
 
 %{ block  work %}
 \vskip1em
-\sandwich~\textbf{Work Experience}
+\MySquare~\textbf{Work Experience}
+\vskip0.5em
 
 %{ for job in work %}
 \vskip0.5em
@@ -167,7 +172,8 @@ urlcolor=Black
 %{ block projects %}
 %{- if projects %}
 \vskip1em
-\sandwich~\textbf{Projects}
+\MySquare~\textbf{Projects \& Publications}
+\vskip0.5em
 
 %{ for project in projects %}
 \vskip0.25em
@@ -188,7 +194,8 @@ urlcolor=Black
 
 %{ block skills %}
 \vskip1em
-\sandwich~\textbf{Core Skills}
+\MySquare~\textbf{Core Skills}
+\vskip0.5em
 
 %{ for skill in skills %}
 \vskip0.25em
