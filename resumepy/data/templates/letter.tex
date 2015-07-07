@@ -32,6 +32,9 @@
         minimum height=1em, minimum width=7.2in, text width=7.2in, align=left
     }
 }
+% color palette
+\definecolor{ColorOne}{RGB}{89, 148, 143}
+\definecolor{ColorTwo}{RGB}{33, 79, 84}
 
 \usepackage{enumitem}
 % set style for lists
@@ -77,12 +80,12 @@ urlcolor=Black
 \textbf{ %{{- contact.name | escape_tex -%}} }
 \hfill \textbf{web:} \href{http://%{{- contact.web | escape_tex -%}} }{ %{{- contact.web | escape_tex -%}} }
 
-\vskip-0.75em
+\vskip-0.5em
 \begin{tikzpicture}[default picture]
-\draw[default line] (0in, 0) -- (7.2in, 0);
+\draw[ColorOne, line width=1.5] (0in, 0) -- (7.2in, 0);
 \end{tikzpicture}
 
-%{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\
+%{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\[0.25em]
 \textbf{tel:} %{{ contact.phone %}} \textbf{email:} \href{mailto:%{{- contact.email -%}} }{ %{{- contact.email -%}} }
 %{- endblock contact %}
 
