@@ -34,7 +34,7 @@
 \definecolor{ColorTwo}{RGB}{33, 79, 84}
 
 
-\newcommand{\MySquare}{
+\newcommand{\sandwich}{
   \tikz[]{
     \draw [ColorOne, line width=1.5] (0ex, 0ex)    -- (2ex, 0ex);	  
     \draw [ColorOne, line width=1.5] (0ex, 0.75ex) -- (2ex, 0.75ex);	  
@@ -47,9 +47,14 @@
     \fill [ColorTwo] (0ex,0ex) circle [radius=0.3ex];
 }}
 
+\newcommand{\itemPlugIn}{
+  \tikz[baseline=-0.75ex]{
+    \draw [ColorTwo, line width=1] (0ex,0ex) -- (1ex, 0ex);
+}}
+
 \usepackage{enumitem}
 % set style for lists
-\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=\thickcircle, leftmargin=*}
+\setlist[itemize]{itemsep=0pt, partopsep=0pt, topsep=0pt, label=\itemPlugIn, leftmargin=*}
 
 \usepackage{calc}
 \usepackage[paper=letterpaper, includefoot,
@@ -94,7 +99,7 @@ urlcolor=Black
 
 \vskip-0.5em
 \begin{tikzpicture}[default picture]
-\draw[ColorTwo, line width=1.5] (0in, 0) -- (7.2in, 0);
+\draw[ColorOne, line width=1.5] (0in, 0) -- (7.2in, 0);
 \end{tikzpicture}
 
 %{{contact.address | escape_tex -%}}, %{{ contact.city %}}, %{{contact.state %}} %{{ contact.zip %}} \\[0.25em]
@@ -103,7 +108,7 @@ urlcolor=Black
 
 %{ block education %}
 \vskip1.0em
-\MySquare~\textbf{Education}
+\sandwich~\textbf{Education}
 \vskip0.5em
 
 %{ for school in education %}
@@ -126,7 +131,7 @@ urlcolor=Black
 %{ block additional_education %}
 %{- if additional_education %}
 \vskip1.0em
-\MySquare~\textbf{Additional Coursework}
+\sandwich~\textbf{Additional Coursework}
 \vskip0.5em
 
 %{ for school in additional_education %}
@@ -149,7 +154,7 @@ urlcolor=Black
 
 %{ block  work %}
 \vskip1em
-\MySquare~\textbf{Work Experience}
+\sandwich~\textbf{Work Experience}
 \vskip0.5em
 
 %{ for job in work %}
@@ -172,7 +177,7 @@ urlcolor=Black
 %{ block projects %}
 %{- if projects %}
 \vskip1em
-\MySquare~\textbf{Projects \& Publications}
+\sandwich~\textbf{Projects \& Publications}
 \vskip0.5em
 
 %{ for project in projects %}
@@ -194,7 +199,7 @@ urlcolor=Black
 
 %{ block skills %}
 \vskip1em
-\MySquare~\textbf{Core Skills}
+\sandwich~\textbf{Core Skills}
 \vskip0.5em
 
 %{ for skill in skills %}
