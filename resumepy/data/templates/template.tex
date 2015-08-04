@@ -222,9 +222,9 @@ urlcolor=Black
 
 \vskip0.1em
 \tikz\pic{fa-phone-square};~%{{ contact.phone %}}
-~\tikz\pic{fa-envelope};~\href{mailto:%{{- contact.email -%}} }{ %{{- contact.email -%}} }
+~\tikz\pic{fa-envelope};~ %{{- contact.email -%}}
 \hfill
-\tikz\pic{fa-globe};~\href{http://%{{- contact.web | escape_tex -%}} }{ %{{- contact.web | escape_tex -%}} }
+\tikz\pic{fa-globe};~%{{- contact.web | escape_tex -%}}
 %{- endblock contact %}
 
 %{ block education %}
@@ -235,7 +235,7 @@ urlcolor=Black
 %{ for school in education %}
 \vskip0.5em
 \textbf{ %{{- school.degree | escape_tex %}}, %{{ school.focus | escape_tex %}} } \hfill %{{ school.graduation %}} \\
-\href{ %{{-school.web-%}} }{ %{{- school.schoolname | escape_tex -%}} }
+%{{- school.schoolname | escape_tex -%}}
 
 %{- if school.notes %}
 \vskip0.25em
@@ -281,7 +281,7 @@ urlcolor=Black
 %{ for job in work %}
 \vskip0.5em
 \textbf{ %{{- job.position | escape_tex %}} } \hfill %{{ job.start %}} -- %{{ job.stop %}} \\
-\href{ %{{- job.web -%}} }{ %{{- job.organization | escape_tex -%}} }
+%{{- job.organization | escape_tex -%}}
 
 %{- if job.notes %}
 \vskip0.25em
@@ -304,7 +304,7 @@ urlcolor=Black
 %{ for project in projects %}
 \vskip0.25em
 \textbf{ %{{- project.title | escape_tex %}} } \hfill %{{ project.date %}} \\
-\href{ %{{- project.web -%}} }{ %{{- project.web | escape_tex -%}} }
+\textcolor{ColorTwo}{ %{{- project.web | escape_tex -%}} }
 \vskip0.25em
 %{- if project.notes %}
 \begin{itemize}
