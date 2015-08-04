@@ -263,9 +263,9 @@ def main_resume():
         templates = ['.', templates_path]
     else:
         if args.output == 'pdf':
-            template_file = 'template.{}'.format('tex')
+            template_file = 'resume.{}'.format('tex')
         else:
-            template_file = 'template.{}'.format(args.output)
+            template_file = 'resume.{}'.format(args.output)
         templates = templates_path
 
     if args.output == 'txt':
