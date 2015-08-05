@@ -222,7 +222,11 @@
       </article>
 
       <article class="article_full">
-        <p>{{ skill.description | wordwrap }}</p>
+      <ul>
+      {% for note in skill.notes -%}
+        <li>{{ note | wordwrap }}</li>
+      {% endfor -%}
+      </ul>
       </article>
       {% endfor -%}
       {%- endblock skills %}
