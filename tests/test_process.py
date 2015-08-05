@@ -47,7 +47,7 @@ class ResumepyProcessTest(unittest.TestCase):
         """
         process_html_resume(self.resume,
                             os.path.join(resumepy_path, 'data', 'templates'),
-                            'template.html')
+                            'resume.html')
         self.assertTrue(os.path.exists('build/html/resume.html'))
 
     def test_process_pdf_resume_created(self):
@@ -56,7 +56,7 @@ class ResumepyProcessTest(unittest.TestCase):
         """
         process_pdf_resume(self.resume,
                            os.path.join(resumepy_path, 'data', 'templates'),
-                           'template.tex')
+                           'resume.tex')
         self.assertTrue(os.path.exists('build/pdf/resume.pdf'))
 
     def test_process_text_resume_created(self):
@@ -65,5 +65,5 @@ class ResumepyProcessTest(unittest.TestCase):
         """
         process_text_resume(self.resume,
                             os.path.join(resumepy_path, 'data', 'templates'),
-                            'template.txt')
+                            'resume.txt')
         self.assertTrue(os.path.exists('build/text/resume.txt'))
