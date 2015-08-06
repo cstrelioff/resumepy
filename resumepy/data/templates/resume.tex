@@ -300,8 +300,10 @@ urlcolor=Black
 
 %{ for project in projects %}
 \vskip0.25em
-\textbf{ %{{- project.title | escape_tex %}} } \hfill %{{ project.date %}} \\
+\textbf{ %{{- project.title | escape_tex %}} }
 \textcolor{ColorTwo}{ %{{- project.web | escape_tex -%}} }
+\hfill %{{ project.date %}}
+
 \vskip0.25em
 %{- if project.notes %}
 \begin{itemize}
