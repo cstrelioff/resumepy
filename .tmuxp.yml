@@ -1,0 +1,23 @@
+session_name: resumepy
+windows:
+  - window_name: vim
+    focus: true
+    window_index: 1
+    layout: main-horizontal
+    panes:
+      - shell_command:
+        - vim
+        focus: true
+      - shell_command:
+        - workon py-3.5.2
+        - clear
+        - pwd
+  - window_name: sandbox
+    window_index: 2
+    panes:
+      - shell_command:
+        - cd ../sandbox
+        - workon py-3.5.2
+        - clear
+        - pwd
+
